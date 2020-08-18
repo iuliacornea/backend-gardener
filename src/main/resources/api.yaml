@@ -1,12 +1,52 @@
 openapi: "3.0.0"
 info:
   version: 1.0.0
-  title: Swagger Petstore
+  title: Gardener API
   license:
-    name: MIT
+    name: UTCN
 servers:
-  - url: http://petstore.swagger.io/v1
+  - url: http://gardener.swagger.io/v1
 paths:
+  /plants:
+    get:
+      summary: List of all plant objects
+      operationId: getPlants
+      tags: 
+        - plants
+      responses:
+        '200':
+          description: All plants of the application
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Plants"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Save or update a plant object. If no id is provided, we will create a new plant. If an id is provided, we will update all the fields of the plant, this includes updating to 'null' the fields which are not sent. 
+      operationId: postPlant
+      tags:
+        - plants
+      requestBody:
+        description: A plant object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Plant'
+      responses:
+        '201':
+          description: Created
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
   /pets:
     get:
       summary: List all pets
@@ -81,6 +121,23 @@ paths:
                 $ref: "#/components/schemas/Error"
 components:
   schemas:
+    Plant:
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          format: uuid
+        soil:
+          $ref: '#/components/schemas/Soil'
+    Plants:
+      type: array
+      items:
+        $ref: '#/components/schemas/Plant'
+    Soil:
+      type: string
+      enum: ['SUCCULENTS', 'ORCHID', 'CONIFERS', 'REGULAR']
     Pet:
       required:
         - id
