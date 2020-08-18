@@ -6,6 +6,7 @@ buildscript {
     }
     dependencies {
         classpath("org.openapitools:openapi-generator-gradle-plugin:4.3.1")
+        classpath("org.springframework:spring-jdbc:5.2.4.RELEASE")
     }
 }
 
@@ -16,6 +17,7 @@ plugins {
     kotlin("plugin.spring") version "1.3.72"
     kotlin("plugin.jpa") version "1.3.72"
     id("org.openapi.generator") version "4.3.0"
+    id("org.flywaydb.flyway") version "6.5.4"
 }
 
 group = "com.iulia"
@@ -33,6 +35,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.flywaydb:flyway-core")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("com.h2database:h2")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
@@ -71,6 +74,9 @@ openApiGenerate {
 }
 
 tasks {
+    flywayMigrate {
+        dependsOn("classes")
+    }
     compileKotlin {
         dependsOn("openApiGenerate")
     }
