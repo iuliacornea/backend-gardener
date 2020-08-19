@@ -4,5 +4,5 @@ create table plant_type(
     growing_configuration       uuid            not null,
     name                        varchar(255)    not null,
     description                 varchar(255),
-    image                       bytea                     
+    image                       bytea
 );
