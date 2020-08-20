@@ -19,11 +19,10 @@ class Specimen (
         @GenericGenerator(name = "idGenerator", strategy = "org.hibernate.id.UUIDGenerator")
         @GeneratedValue(generator = "idGenerator")
         @Column
-        var id: UUID,
+        var id: UUID? = null,
 
-        @ManyToOne(optional = false)
-        @JoinColumn(name = "app_user", nullable = false)
-        var appUser: AppUser,
+        @Column(name = "app_user")
+        var appUserId: UUID,
 
         @Column
         var name: String,
@@ -40,6 +39,6 @@ class Specimen (
         var season: Season
 ): UuidEntity {
         override fun getUuid(): UUID {
-                return id
+                return id!!
         }
 }

@@ -57,6 +57,7 @@ tasks.withType<KotlinCompile> {
 openApiGenerate {
     generatorName.set("kotlin-spring")
     // globalProperty.set("models,apis")
+    //    components = ["models", "apis"]
     inputSpec.set("$rootDir/src/main/resources/api.yaml".toString())
     outputDir.set("$rootDir/kotlin".toString())
     apiPackage.set("com.iulia.gardener.api")

@@ -1,10 +1,13 @@
 package com.iulia.gardener.entity
 
+import com.iulia.gardener.model.FiveDegreeScale
 import com.iulia.gardener.model.SoilType
 import org.hibernate.annotations.GenericGenerator
 import java.util.*
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.EnumType
+import javax.persistence.Enumerated
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.Table
@@ -17,36 +20,42 @@ class GrowingConfigurations (
         @GenericGenerator(name = "idGenerator", strategy = "org.hibernate.id.UUIDGenerator")
         @GeneratedValue(generator = "idGenerator")
         @Column
-        var id: UUID,
+        var id: UUID? = null,
 
+        @Enumerated(EnumType.STRING)
         @Column
         var soilType: SoilType?,
 
         @Column
-        var soilQuantity: Float?,
+        var soilQuantity: Int?,
+
+        @Enumerated(EnumType.STRING)
+        @Column
+        var soilHumiditySummer: FiveDegreeScale?,
+
+        @Enumerated(EnumType.STRING)
+        @Column
+        var soilHumidityWinter: FiveDegreeScale?,
+
+        @Enumerated(EnumType.STRING)
+        @Column
+        var airHumidity: FiveDegreeScale?,
 
         @Column
-        var soilHumiditySummer: Int?,
+        var airTemperatureSummer: Int?,
 
         @Column
-        var soilHumidityWinter: Int?,
+        var airTemperatureWinter: Int?,
 
+        @Enumerated(EnumType.STRING)
         @Column
-        var airHumidity: Int?,
+        var lightIntensitySummer: FiveDegreeScale?,
 
+        @Enumerated(EnumType.STRING)
         @Column
-        var airTemperatureSummer: Float?,
-
-        @Column
-        var airTemperatureWinter: Float?,
-
-        @Column
-        var lightIntensitySummer: Float?,
-
-        @Column
-        var lightIntensityWinter: Float?
+        var lightIntensityWinter: FiveDegreeScale?
 ): UuidEntity {
         override fun getUuid(): UUID {
-                return id
+                return id!!
         }
 }

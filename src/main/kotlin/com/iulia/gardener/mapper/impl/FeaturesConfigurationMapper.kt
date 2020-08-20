@@ -2,14 +2,15 @@ package com.iulia.gardener.mapper.impl
 
 import com.iulia.gardener.entity.FeaturesConfiguration
 import com.iulia.gardener.mapper.GenericMapper
-import com.iulia.gardener.model.PlantFeature
+import com.iulia.gardener.model.FeaturesConfigurationDto
 import org.springframework.stereotype.Component
 
 @Component
-class FeaturesConfigurationMapper: GenericMapper<PlantFeature, FeaturesConfiguration> {
+class FeaturesConfigurationMapper: GenericMapper<FeaturesConfigurationDto, FeaturesConfiguration> {
 
-    override fun createEntity(dto: PlantFeature): FeaturesConfiguration {
+    override fun toEntity(dto: FeaturesConfigurationDto): FeaturesConfiguration {
         return FeaturesConfiguration(
+                id = dto.id,
                 stemType = dto.stemType,
                 stemSpikes = dto.stemSpikes,
                 leafDivisionOfBlade = dto.leafDivisionOfBlade,
@@ -23,24 +24,8 @@ class FeaturesConfigurationMapper: GenericMapper<PlantFeature, FeaturesConfigura
         )
     }
 
-    override fun updateEntity(dto: PlantFeature, entity: FeaturesConfiguration): FeaturesConfiguration {
-        return FeaturesConfiguration(
-                id = entity.id,
-                stemType = dto.stemType,
-                stemSpikes = dto.stemSpikes,
-                leafDivisionOfBlade = dto.leafDivisionOfBlade,
-                leafArrangementOnTheStem = dto.leafArrangementOnTheStem,
-                leafSurface = dto.leafSurface,
-                leafTexture = dto.leafTexture,
-                leafVeinType = dto.leafVeinType,
-                flowerExistance = dto.flowerExistance,
-                flowerShape = dto.flowerShape,
-                flowerPetals = dto.flowerPetals
-        )
-    }
-
-    override fun toDto(entity: FeaturesConfiguration): PlantFeature {
-        return PlantFeature(
+    override fun toDto(entity: FeaturesConfiguration): FeaturesConfigurationDto {
+        return FeaturesConfigurationDto(
                 id = entity.id,
                 stemType = entity.stemType,
                 stemSpikes = entity.stemSpikes,

@@ -3,20 +3,20 @@ package com.iulia.gardener.model
 import com.fasterxml.jackson.annotation.JsonProperty
 
 /**
- * 
- * @param id 
- * @param stemType 
- * @param stemSpikes 
- * @param leafDivisionOfBlade 
- * @param leafArrangementOnTheStem 
- * @param leafSurface 
- * @param leafTexture 
- * @param leafVeinType 
- * @param flowerExistance 
- * @param flowerShape 
- * @param flowerPetals 
+ *
+ * @param id
+ * @param stemType
+ * @param stemSpikes
+ * @param leafDivisionOfBlade
+ * @param leafArrangementOnTheStem
+ * @param leafSurface
+ * @param leafTexture
+ * @param leafVeinType
+ * @param flowerExistance
+ * @param flowerShape
+ * @param flowerPetals
  */
-data class PlantFeature(
+data class FeaturesConfigurationDto(
 
     @JsonProperty("id") val id: java.util.UUID? = null,
 

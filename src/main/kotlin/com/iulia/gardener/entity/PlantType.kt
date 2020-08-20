@@ -19,7 +19,7 @@ class PlantType (
         @GenericGenerator(name = "idGenerator", strategy = "org.hibernate.id.UUIDGenerator")
         @GeneratedValue(generator = "idGenerator")
         @Column
-        var id: UUID,
+        var id: UUID? = null,
 
         @Column
         var name: String,
@@ -39,6 +39,6 @@ class PlantType (
         var image: ByteArray?
 ): UuidEntity {
         override fun getUuid(): UUID {
-                return id
+                return id!!
         }
 }

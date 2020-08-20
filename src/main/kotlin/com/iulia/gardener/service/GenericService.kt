@@ -11,24 +11,9 @@ abstract class GenericService <Entity: UuidEntity, Dto, Mapper: GenericMapper<Dt
     abstract var repository: Repository
 
     fun save(dto: Dto): Dto {
-        return if(getDtoId(dto) == null) {
-            create(dto)
-        } else {
-            update(dto)
-        }
-    }
-
-    private fun create(dto: Dto): Dto  {
-        var toBeSaved = mapper.createEntity(dto)
-        var created = repository.saveAndFlush(toBeSaved)
-        return mapper.toDto(created)
-    }
-
-    private fun update(dto: Dto): Dto  {
-        var existing = repository.getOne(getDtoId(dto)!!)
-        var tobeUpdated = mapper.updateEntity(dto, existing)
-        var updated = repository.saveAndFlush(tobeUpdated)
-        return mapper.toDto(updated)
+        var toBeSaved = mapper.toEntity(dto)
+        var saved = repository.saveAndFlush(toBeSaved)
+        return mapper.toDto(saved)
     }
 
     abstract fun getDtoId(dto: Dto): UUID?

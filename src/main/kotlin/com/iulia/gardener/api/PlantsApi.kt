@@ -5,7 +5,7 @@
 */
 package com.iulia.gardener.api
 
-import com.iulia.gardener.model.Plant
+import com.iulia.gardener.model.PlantTypeDto
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RequestBody
@@ -23,7 +23,7 @@ interface PlantsApi {
             value = ["/plants"],
             produces = ["application/json"],
             method = [RequestMethod.GET])
-    fun getPlants(): ResponseEntity<List<Plant>> {
+    fun getPlants(): ResponseEntity<List<PlantTypeDto>> {
         return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
     }
 
@@ -33,8 +33,8 @@ interface PlantsApi {
             produces = ["application/json"],
             consumes = ["application/json"],
             method = [RequestMethod.POST])
-    fun postPlant(@RequestBody plant: Plant
-): ResponseEntity<Plant> {
+    fun postPlant(@RequestBody plantTypeDto: PlantTypeDto
+): ResponseEntity<PlantTypeDto> {
         return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
     }
 }
