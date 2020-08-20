@@ -56,11 +56,12 @@ tasks.withType<KotlinCompile> {
 
 openApiGenerate {
     generatorName.set("kotlin-spring")
+    // globalProperty.set("models,apis")
     inputSpec.set("$rootDir/src/main/resources/api.yaml".toString())
     outputDir.set("$rootDir/kotlin".toString())
-    apiPackage.set("org.openapitools.example.api")
-    invokerPackage.set("org.openapitools.example.invoker")
-    modelPackage.set("org.openapitools.example.model")
+    apiPackage.set("com.iulia.gardener.api")
+    modelPackage.set("com.iulia.gardener.model")
+    // invokerPackage.set("org.openapitools.example.invoker")
 
     // https://openapi-generator.tech/docs/generators/kotlin-spring
     configOptions.set(mapOf(
@@ -69,7 +70,8 @@ openApiGenerate {
             Pair("library", "spring"),
             Pair("gradleBuildFile", "false"),
             Pair("exceptionHandler", "false"),
-            Pair("enumPropertyNaming", "UPPERCASE")
+            Pair("enumPropertyNaming", "UPPERCASE"),
+            Pair("globalProperty", "models,apis")
     ))
 }
 

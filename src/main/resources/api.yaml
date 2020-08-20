@@ -11,7 +11,7 @@ paths:
     get:
       summary: List of all plant objects
       operationId: getPlants
-      tags: 
+      tags:
         - plants
       responses:
         '200':
@@ -27,7 +27,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
     post:
-      summary: Save or update a plant object. If no id is provided, we will create a new plant. If an id is provided, we will update all the fields of the plant, this includes updating to 'null' the fields which are not sent. 
+      summary: Save or update a plant object. If no id is provided, we will create a new plant. If an id is provided, we will update all the fields of the plant, this includes updating to 'null' the fields which are not sent.
       operationId: postPlant
       tags:
         - plants
@@ -41,84 +41,17 @@ paths:
       responses:
         '201':
           description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plant'
         default:
           description: unexpected error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  /pets:
-    get:
-      summary: List all pets
-      operationId: listPets
-      tags:
-        - pets
-      parameters:
-        - name: limit
-          in: query
-          description: How many items to return at one time (max 100)
-          required: false
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: A paged array of pets
-          headers:
-            x-next:
-              description: A link to the next page of responses
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Pets"
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-    post:
-      summary: Create a pet
-      operationId: createPets
-      tags:
-        - pets
-      responses:
-        '201':
-          description: Null response
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-  /pets/{petId}:
-    get:
-      summary: Info for a specific pet
-      operationId: showPetById
-      tags:
-        - pets
-      parameters:
-        - name: petId
-          in: path
-          required: true
-          description: The id of the pet to retrieve
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Expected response to a valid request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Pets"
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
+
 components:
   schemas:
     Plant:
@@ -128,32 +61,97 @@ components:
           format: uuid
         name:
           type: string
-          format: uuid
-        soil:
-          $ref: '#/components/schemas/Soil'
+        features:
+          $ref: '#/components/schemas/PlantFeature'
+        soilType:
+          $ref: '#/components/schemas/SoilType'
     Plants:
       type: array
       items:
         $ref: '#/components/schemas/Plant'
-    Soil:
-      type: string
-      enum: ['SUCCULENTS', 'ORCHID', 'CONIFERS', 'REGULAR']
-    Pet:
-      required:
-        - id
-        - name
+    PlantFeature:
+      type: object
       properties:
         id:
-          type: integer
-          format: int64
-        name:
           type: string
-        tag:
-          type: string
-    Pets:
-      type: array
-      items:
-        $ref: "#/components/schemas/Pet"
+          format: uuid
+        stemType:
+          $ref: '#/components/schemas/StemType'
+        stemSpikes:
+          $ref: '#/components/schemas/StemSpikes'
+        leafDivisionOfBlade:
+          $ref: '#/components/schemas/LeafDivisionOfBlade'
+        leafArrangementOnTheStem:
+          $ref: '#/components/schemas/LeafArrangementOnTheStem'
+        leafSurface:
+          $ref: '#/components/schemas/LeafSurface'
+        leafTexture:
+          $ref: '#/components/schemas/LeafTexture'
+        leafVeinType:
+          $ref: '#/components/schemas/LeafVeinType'
+        flowerExistance:
+          $ref: '#/components/schemas/FlowerExistance'
+        flowerShape:
+          $ref: '#/components/schemas/FlowerShape'
+        flowerPetals:
+          $ref: '#/components/schemas/FlowerPetals'
+    StemType:
+      type: string
+      enum: ['WOODY', 'HERBACEOUS', 'NOT_VISIBLE']
+    StemSpikes:
+      type: string
+      enum: ['NO', 'WOODY', 'SOFT']
+    LeafDivisionOfBlade:
+      type: string
+      enum: ['SIMPLE', 'WITH_LEAFLETS', 'PINNATE_COMPOUND', 'PALMATE_COMPOUND' ,'DOUBLE_COMPOUND']
+    LeafArrangementOnTheStem:
+      type: string
+      enum: ['BASAL', 'WHORLED', 'ALTERNATE', 'OPPOSITE']
+    LeafSurface:
+      type: string
+      enum: ['SMOOTH', 'HAIRY', 'WARTY', 'PLEATED', 'ROUGHENED_RIDGES', 'GROOVED']
+    LeafTexture:
+      type: string
+      enum: ['LEATHERY', 'STICKY', 'FLESHY', 'GRASSY', 'NEEDLE', 'RUGOSE', 'SPIKE']
+    LeafVeinType:
+      type: string
+      enum: ['ARCUATE', 'CROSS_VENULATE', 'DICHTOMOUS', 'LONGITUDINAL', 'PALMATE', 'PARALLEL', 'PINNATE', 'RETICULATE', 'ROTATE']
+    FlowerExistance:
+      type: string
+      enum: ['YES', 'NO']
+    FlowerShape:
+      type: string
+      enum: ['REGULAR', 'IREGULAR']
+    FlowerPetals:
+      type: string
+      enum: ['UNITED', 'SEPARATED', 'FAN']
+    GrowingConfiguration:
+      type: object
+      properties:
+        soilType:
+          $ref: '#/components/schemas/SoilType'
+        soilQuantity:
+          type: number
+        soilHumiditySummer:
+          $ref: '#/components/schemas/FiveDegreeScale'
+        soilHumidityWinter:
+          $ref: '#/components/schemas/FiveDegreeScale'
+        airHumidity:
+          $ref: '#/components/schemas/FiveDegreeScale'
+        airTemperatureSummer:
+          type: number
+        airTemperatureWinter:
+          type: number
+        lightIntensitySummer:
+          $ref: '#/components/schemas/FiveDegreeScale'
+        lightIntensityWinter:
+          $ref: '#/components/schemas/FiveDegreeScale'
+    SoilType:
+      type: string
+      enum: ['SUCCULENTS', 'ORCHID', 'CONIFERS', 'REGULAR']
+    FiveDegreeScale:
+      type: string
+      enum: ['VERY_LOW', 'LOW', 'MEDIUM', 'HIGH', 'VERY_HIGH']
     Error:
       required:
         - code

@@ -1,0 +1,29 @@
+package com.iulia.gardener.model
+
+
+/**
+* 
+* Values: ARCUATE,CROSS_VENULATE,DICHTOMOUS,LONGITUDINAL,PALMATE,PARALLEL,PINNATE,RETICULATE,ROTATE
+*/
+enum class LeafVeinType(val value: kotlin.String) {
+
+    ARCUATE("ARCUATE"),
+
+    CROSS_VENULATE("CROSS_VENULATE"),
+
+    DICHTOMOUS("DICHTOMOUS"),
+
+    LONGITUDINAL("LONGITUDINAL"),
+
+    PALMATE("PALMATE"),
+
+    PARALLEL("PARALLEL"),
+
+    PINNATE("PINNATE"),
+
+    RETICULATE("RETICULATE"),
+
+    ROTATE("ROTATE");
+
+}
+
