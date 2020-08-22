@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.validation.annotation.Validated
+import org.springframework.web.bind.annotation.PathVariable
 import kotlin.collections.List
 
 @Validated
@@ -24,6 +25,15 @@ interface PlantsApi {
             produces = ["application/json"],
             method = [RequestMethod.GET])
     fun getPlants(): ResponseEntity<List<PlantTypeDto>> {
+        return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
+    }
+
+    @RequestMapping(
+            value = ["/plants/{id}"],
+            produces = ["application/json"],
+            method = [RequestMethod.GET])
+    fun getPlant( @PathVariable("id") id: java.util.UUID
+    ): ResponseEntity<PlantTypeDto> {
         return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
     }
 

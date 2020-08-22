@@ -51,6 +51,33 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  /plants/{id}:
+    get:
+      summary: One plant
+      operationId: getPlant
+      tags:
+        - plants
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          required: true
+          description: Uuid of the plant
+      responses:
+        '200':
+          description: The plant with the matching id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Plant"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 
 components:
   schemas:
