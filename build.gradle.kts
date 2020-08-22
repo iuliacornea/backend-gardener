@@ -36,6 +36,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.flywaydb:flyway-core")
+    implementation("javax.validation:validation-api")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("com.h2database:h2")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
@@ -56,13 +57,14 @@ tasks.withType<KotlinCompile> {
 
 openApiGenerate {
     generatorName.set("kotlin-spring")
-    // globalProperty.set("models,apis")
-    //    components = ["models", "apis"]
     inputSpec.set("$rootDir/src/main/resources/api.yaml".toString())
-    outputDir.set("$rootDir/kotlin".toString())
-    apiPackage.set("com.iulia.gardener.api")
-    modelPackage.set("com.iulia.gardener.model")
-    // invokerPackage.set("org.openapitools.example.invoker")
+    outputDir.set("$rootDir".toString())
+    apiPackage.set("org.openapitools.gardener.api")
+    modelPackage.set("org.openapitools.gardener.model")
+    generateModelTests.set(false)
+    generateModelDocumentation.set(false)
+    generateApiTests.set(false)
+    generateApiDocumentation.set(false)
 
     // https://openapi-generator.tech/docs/generators/kotlin-spring
     configOptions.set(mapOf(
