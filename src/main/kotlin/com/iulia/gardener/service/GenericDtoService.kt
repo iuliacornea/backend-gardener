@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.repository.findByIdOrNull
 import java.util.*
 
-abstract class GenericService <Entity: UuidEntity, Dto, Mapper: GenericMapper<Dto, Entity>, Repository: JpaRepository<Entity, UUID>> {
+abstract class GenericDtoService <Entity: UuidEntity, Dto, Mapper: GenericMapper<Dto, Entity>, Repository: JpaRepository<Entity, UUID>> {
 
     abstract var mapper: Mapper
     abstract var repository: Repository

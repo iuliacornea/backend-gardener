@@ -2,7 +2,7 @@ package com.iulia.gardener.mapper.impl
 
 import com.iulia.gardener.entity.GrowingConfigurations
 import com.iulia.gardener.mapper.GenericMapper
-import com.iulia.gardener.model.GrowingConfigurationDto
+import org.openapitools.gardener.model.GrowingConfigurationDto
 import org.springframework.stereotype.Component
 
 @Component

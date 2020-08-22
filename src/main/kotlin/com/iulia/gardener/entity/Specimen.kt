@@ -1,6 +1,6 @@
 package com.iulia.gardener.entity
 
-import com.iulia.gardener.model.Season
+import org.openapitools.gardener.model.Season
 import org.hibernate.annotations.GenericGenerator
 import java.util.*
 import javax.persistence.Column
@@ -36,7 +36,7 @@ class Specimen (
         var growingConfigurations: GrowingConfigurations?,
 
         @Column
-        var season: Season
+        var season: Season?
 ): UuidEntity {
         override fun getUuid(): UUID {
                 return id!!

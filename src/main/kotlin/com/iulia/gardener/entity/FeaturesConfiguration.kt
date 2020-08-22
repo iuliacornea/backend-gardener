@@ -1,16 +1,16 @@
 package com.iulia.gardener.entity
 
-import com.iulia.gardener.model.FlowerExistance
-import com.iulia.gardener.model.FlowerPetals
-import com.iulia.gardener.model.FlowerShape
-import com.iulia.gardener.model.LeafArrangementOnTheStem
-import com.iulia.gardener.model.LeafDivisionOfBlade
-import com.iulia.gardener.model.LeafSurface
-import com.iulia.gardener.model.LeafTexture
-import com.iulia.gardener.model.LeafVeinType
-import com.iulia.gardener.model.StemSpikes
-import com.iulia.gardener.model.StemType
+import org.openapitools.gardener.model.FlowerExistance
+import org.openapitools.gardener.model.FlowerShape
+import org.openapitools.gardener.model.LeafArrangementOnTheStem
+import org.openapitools.gardener.model.LeafDivisionOfBlade
+import org.openapitools.gardener.model.LeafSurface
+import org.openapitools.gardener.model.LeafTexture
+import org.openapitools.gardener.model.LeafVeinType
+import org.openapitools.gardener.model.StemSpikes
+import org.openapitools.gardener.model.StemType
 import org.hibernate.annotations.GenericGenerator
+import org.openapitools.gardener.model.FlowerPetals
 import java.util.*
 import javax.persistence.Column
 import javax.persistence.Entity

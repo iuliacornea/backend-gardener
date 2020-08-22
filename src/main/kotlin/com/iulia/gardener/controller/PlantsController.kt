@@ -1,9 +1,9 @@
 package com.iulia.gardener.controller
 
-import com.iulia.gardener.api.PlantsApi
-import com.iulia.gardener.model.PlantTypeDto
-import com.iulia.gardener.service.impl.FeaturesConfigurationService
-import com.iulia.gardener.service.impl.PlantTypeService
+import org.openapitools.gardener.model.PlantTypeDto
+import com.iulia.gardener.service.impl.FeaturesConfigurationDtoService
+import com.iulia.gardener.service.impl.PlantTypeDtoService
+import org.openapitools.gardener.api.PlantsApi
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
@@ -11,8 +11,8 @@ import java.util.*
 
 @Controller
 class PlantsController(
-        var featuresConfigurationService: FeaturesConfigurationService,
-        var plantTypeService: PlantTypeService
+        var featuresConfigurationService: FeaturesConfigurationDtoService,
+        var plantTypeService: PlantTypeDtoService
 ) : PlantsApi {
 
     override fun getPlants(): ResponseEntity<List<PlantTypeDto>> {

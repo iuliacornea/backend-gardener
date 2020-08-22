@@ -1,7 +1,7 @@
 package com.iulia.gardener.entity
 
-import com.iulia.gardener.model.FiveDegreeScale
-import com.iulia.gardener.model.SoilType
+import org.openapitools.gardener.model.FiveDegreeScale
+import org.openapitools.gardener.model.SoilType
 import org.hibernate.annotations.GenericGenerator
 import java.util.*
 import javax.persistence.Column

@@ -4,9 +4,10 @@ import com.iulia.gardener.entity.GrowingConfigurations
 import com.iulia.gardener.entity.PlantType
 import com.iulia.gardener.entity.Specimen
 import com.iulia.gardener.mapper.GenericMapper
-import com.iulia.gardener.model.GrowingConfigurationDto
-import com.iulia.gardener.model.PlantTypeDto
-import com.iulia.gardener.model.SpecimenDto
+import com.iulia.gardener.service.impl.UserService
+import org.openapitools.gardener.model.GrowingConfigurationDto
+import org.openapitools.gardener.model.PlantTypeDto
+import org.openapitools.gardener.model.SpecimenDto
 
 class SpecimenMapper(
         var growingConfigurationsMapper: GrowingConfigurationsMapper,
@@ -25,7 +26,7 @@ class SpecimenMapper(
         return Specimen(
                 id = dto.id,
                 name = dto.name,
-                appUserId = dto.appUserId,
+                appUserId =  UserService.getLoggedInUser().id,
                 growingConfigurations = growingConfigurations,
                 plantType = plantType,
                 season = dto.season
@@ -44,7 +45,6 @@ class SpecimenMapper(
         return SpecimenDto(
                 id = entity.id,
                 name = entity.name,
-                appUserId = entity.appUserId,
                 growingConfiguration = growingConfigurations,
                 plantType = plantType,
                 season = entity.season

@@ -4,9 +4,9 @@ import com.iulia.gardener.entity.FeaturesConfiguration
 import com.iulia.gardener.entity.GrowingConfigurations
 import com.iulia.gardener.entity.PlantType
 import com.iulia.gardener.mapper.GenericMapper
-import com.iulia.gardener.model.FeaturesConfigurationDto
-import com.iulia.gardener.model.GrowingConfigurationDto
-import com.iulia.gardener.model.PlantTypeDto
+import org.openapitools.gardener.model.FeaturesConfigurationDto
+import org.openapitools.gardener.model.GrowingConfigurationDto
+import org.openapitools.gardener.model.PlantTypeDto
 import org.springframework.stereotype.Component
 
 @Component
@@ -25,7 +25,7 @@ class PlantTypeMapper(
                 description = dto.description,
                 featuresConfiguration = featuresConfig,
                 growingConfigurations = growingConfig,
-                image = dto.image
+                image = dto.image?.toByteArray()
         )
     }
 
@@ -39,7 +39,7 @@ class PlantTypeMapper(
                 description = entity.description,
                 featuresConfiguration = featuresConfig,
                 growingConfiguration = growingConfig,
-                image = entity.image
+                image = entity.image?.toString()
         )
     }
 

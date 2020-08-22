@@ -19,7 +19,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Plants"
+                $ref: "#/components/schemas/PlantTypeDtos"
         default:
           description: unexpected error
           content:
@@ -37,14 +37,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Plant'
+              $ref: '#/components/schemas/PlantTypeDto'
       responses:
         '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Plant'
+                $ref: '#/components/schemas/PlantTypeDto'
         default:
           description: unexpected error
           content:
@@ -71,7 +71,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Plant"
+                $ref: "#/components/schemas/PlantTypeDto"
         default:
           description: unexpected error
           content:
@@ -81,22 +81,27 @@ paths:
 
 components:
   schemas:
-    Plant:
+    PlantTypeDto:
+      required: ['name', 'featuresConfiguration', 'growingConfiguration']
       properties:
         id:
           type: string
           format: uuid
         name:
           type: string
-        features:
-          $ref: '#/components/schemas/PlantFeature'
-        soilType:
-          $ref: '#/components/schemas/SoilType'
-    Plants:
+        description:
+          type: string
+        image:
+          type: string
+        featuresConfiguration:
+          $ref: '#/components/schemas/FeaturesConfigurationDto'
+        growingConfiguration:
+          $ref: '#/components/schemas/GrowingConfigurationDto'
+    PlantTypeDtos:
       type: array
       items:
-        $ref: '#/components/schemas/Plant'
-    PlantFeature:
+        $ref: '#/components/schemas/PlantTypeDto'
+    FeaturesConfigurationDto:
       type: object
       properties:
         id:
@@ -152,13 +157,17 @@ components:
     FlowerPetals:
       type: string
       enum: ['UNITED', 'SEPARATED', 'FAN']
-    GrowingConfiguration:
+    GrowingConfigurationDto:
       type: object
       properties:
+        id:
+          type: string
+          format: uuid
         soilType:
           $ref: '#/components/schemas/SoilType'
         soilQuantity:
-          type: number
+          type: integer
+          format: int32
         soilHumiditySummer:
           $ref: '#/components/schemas/FiveDegreeScale'
         soilHumidityWinter:
@@ -166,9 +175,11 @@ components:
         airHumidity:
           $ref: '#/components/schemas/FiveDegreeScale'
         airTemperatureSummer:
-          type: number
+          type: integer
+          format: int32
         airTemperatureWinter:
-          type: number
+          type: integer
+          format: int32
         lightIntensitySummer:
           $ref: '#/components/schemas/FiveDegreeScale'
         lightIntensityWinter:
@@ -179,6 +190,24 @@ components:
     FiveDegreeScale:
       type: string
       enum: ['VERY_LOW', 'LOW', 'MEDIUM', 'HIGH', 'VERY_HIGH']
+    SpecimenDto:
+      required: ['name']
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        plantType:
+          $ref: '#/components/schemas/PlantTypeDto'
+        growingConfiguration:
+          $ref: '#/components/schemas/GrowingConfigurationDto'
+        season:
+          $ref: '#/components/schemas/Season'
+    Season:
+      type: string
+      enum: ['SPRING', 'SUMMER', 'AUTUMN', 'WINTER']
+
     Error:
       required:
         - code
