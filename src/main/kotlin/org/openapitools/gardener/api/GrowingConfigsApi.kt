@@ -6,7 +6,7 @@
 package org.openapitools.gardener.api
 
 import org.openapitools.gardener.model.Error
-import org.openapitools.gardener.model.PlantTypeDto
+import org.openapitools.gardener.model.GrowingConfigurationDto
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -36,45 +36,45 @@ import kotlin.collections.Map
 
 @Validated
 @RequestMapping("\${api.base-path:/v1}")
-interface PlantsApi {
+interface GrowingConfigsApi {
 
 
     @RequestMapping(
-            value = ["/plants/{id}"],
+            value = ["/growingConfigurations/{id}"],
             produces = ["application/json"], 
             method = [RequestMethod.DELETE])
-    fun deletePlant( @PathVariable("id") id: java.util.UUID
+    fun deleteGrowingConfiguration( @PathVariable("id") id: java.util.UUID
 ): ResponseEntity<Unit> {
         return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
     }
 
 
     @RequestMapping(
-            value = ["/plants/{id}"],
+            value = ["/growingConfigurations/{id}"],
             produces = ["application/json"], 
             method = [RequestMethod.GET])
-    fun getPlant( @PathVariable("id") id: java.util.UUID
-): ResponseEntity<PlantTypeDto> {
+    fun getGrowingConfiguration( @PathVariable("id") id: java.util.UUID
+): ResponseEntity<GrowingConfigurationDto> {
         return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
     }
 
 
     @RequestMapping(
-            value = ["/plants"],
+            value = ["/growingConfigurations"],
             produces = ["application/json"], 
             method = [RequestMethod.GET])
-    fun getPlants(): ResponseEntity<List<PlantTypeDto>> {
+    fun getGrowingConfigurations(): ResponseEntity<List<GrowingConfigurationDto>> {
         return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
     }
 
 
     @RequestMapping(
-            value = ["/plants"],
+            value = ["/growingConfigurations"],
             produces = ["application/json"], 
             consumes = ["application/json"],
             method = [RequestMethod.POST])
-    fun postPlant( @Valid @RequestBody plantTypeDto: PlantTypeDto
-): ResponseEntity<PlantTypeDto> {
+    fun postGrowingConfiguration( @Valid @RequestBody growingConfigurationDto: GrowingConfigurationDto
+): ResponseEntity<GrowingConfigurationDto> {
         return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
     }
 }

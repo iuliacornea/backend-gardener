@@ -78,6 +78,214 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+    delete:
+      summary: Delete the plant with the give id
+      operationId: deletePlant
+      tags:
+        - plants
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          required: true
+          description: Uuid of the plant
+      responses:
+        '200':
+          description: The plant with the matching id was deleted.
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /featureConfigurations:
+    get:
+      tags:
+        - features
+      summary: List of all feature configuration objects
+      operationId: getFeatureConfigurations
+      responses:
+        '200':
+          description: All feature configurations of the application
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FeaturesConfigurationDtos"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      tags:
+        - features
+      summary: Save or update a feature configuration object. If no id is provided, we will create a new feature configuration. If an id is provided, we will update all the fields of the feature configuration, this includes updating to 'null' the fields which are not sent.
+      operationId: postFeatureConfiguration
+      requestBody:
+        description: A feature configuration object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeaturesConfigurationDto'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeaturesConfigurationDto'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /featureConfigurations/{id}:
+    get:
+      tags:
+        - features
+      summary: One feature configuration
+      operationId: getFeatureConfiguration
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          required: true
+          description: Uuid of the feature configuration
+      responses:
+        '200':
+          description: The feature configuration with the matching id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FeaturesConfigurationDto"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      tags:
+        - features
+      summary: Delete the feature configuration with the give id
+      operationId: deleteFeatureConfiguration
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          required: true
+          description: Uuid of the feature configuration
+      responses:
+        '200':
+          description: The feature configuration with the matching id was deleted.
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /growingConfigurations:
+    get:
+      tags:
+        - growingConfigs
+      summary: List of all growing configurations objects
+      operationId: getGrowingConfigurations
+      responses:
+        '200':
+          description: All growing configurations of the application
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GrowingConfigurationDtos"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      tags:
+        - growingConfigs
+      summary: Save or update a growing configurations object. If no id is provided, we will create a new growing configuration. If an id is provided, we will update all the fields of the growing configuration, this includes updating to 'null' the fields which are not sent.
+      operationId: postGrowingConfiguration
+      requestBody:
+        description: A growing configuration object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GrowingConfigurationDto'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrowingConfigurationDto'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /growingConfigurations/{id}:
+    get:
+      tags:
+        - growingConfigs
+      summary: One growing configuration
+      operationId: getGrowingConfiguration
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          required: true
+          description: Uuid of the growing configuration
+      responses:
+        '200':
+          description: The growing configuration with the matching id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GrowingConfigurationDto"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      tags:
+        - growingConfigs
+      summary: Delete the growing configuration with the give id
+      operationId: deleteGrowingConfiguration
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          required: true
+          description: Uuid of the growing configuration
+      responses:
+        '200':
+          description: The growing configuration with the matching id was deleted.
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 
 components:
   schemas:
@@ -127,6 +335,55 @@ components:
           $ref: '#/components/schemas/FlowerShape'
         flowerPetals:
           $ref: '#/components/schemas/FlowerPetals'
+    FeaturesConfigurationDtos:
+      type: array
+      items:
+        $ref: '#/components/schemas/FeaturesConfigurationDto'
+    GrowingConfigurationDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        soilType:
+          $ref: '#/components/schemas/SoilType'
+        soilQuantity:
+          type: integer
+          format: int32
+        soilHumiditySummer:
+          $ref: '#/components/schemas/FiveDegreeScale'
+        soilHumidityWinter:
+          $ref: '#/components/schemas/FiveDegreeScale'
+        airHumidity:
+          $ref: '#/components/schemas/FiveDegreeScale'
+        airTemperatureSummer:
+          type: integer
+          format: int32
+        airTemperatureWinter:
+          type: integer
+          format: int32
+        lightIntensitySummer:
+          $ref: '#/components/schemas/FiveDegreeScale'
+        lightIntensityWinter:
+          $ref: '#/components/schemas/FiveDegreeScale'
+    GrowingConfigurationDtos:
+      type: array
+      items:
+        $ref: '#/components/schemas/GrowingConfigurationDto'
+    SpecimenDto:
+      required: ['name']
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        plantType:
+          $ref: '#/components/schemas/PlantTypeDto'
+        growingConfiguration:
+          $ref: '#/components/schemas/GrowingConfigurationDto'
+        season:
+          $ref: '#/components/schemas/Season'
     StemType:
       type: string
       enum: ['WOODY', 'HERBACEOUS', 'NOT_VISIBLE']
@@ -157,53 +414,12 @@ components:
     FlowerPetals:
       type: string
       enum: ['UNITED', 'SEPARATED', 'FAN']
-    GrowingConfigurationDto:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        soilType:
-          $ref: '#/components/schemas/SoilType'
-        soilQuantity:
-          type: integer
-          format: int32
-        soilHumiditySummer:
-          $ref: '#/components/schemas/FiveDegreeScale'
-        soilHumidityWinter:
-          $ref: '#/components/schemas/FiveDegreeScale'
-        airHumidity:
-          $ref: '#/components/schemas/FiveDegreeScale'
-        airTemperatureSummer:
-          type: integer
-          format: int32
-        airTemperatureWinter:
-          type: integer
-          format: int32
-        lightIntensitySummer:
-          $ref: '#/components/schemas/FiveDegreeScale'
-        lightIntensityWinter:
-          $ref: '#/components/schemas/FiveDegreeScale'
     SoilType:
       type: string
       enum: ['SUCCULENTS', 'ORCHID', 'CONIFERS', 'REGULAR']
     FiveDegreeScale:
       type: string
       enum: ['VERY_LOW', 'LOW', 'MEDIUM', 'HIGH', 'VERY_HIGH']
-    SpecimenDto:
-      required: ['name']
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        plantType:
-          $ref: '#/components/schemas/PlantTypeDto'
-        growingConfiguration:
-          $ref: '#/components/schemas/GrowingConfigurationDto'
-        season:
-          $ref: '#/components/schemas/Season'
     Season:
       type: string
       enum: ['SPRING', 'SUMMER', 'AUTUMN', 'WINTER']

@@ -11,26 +11,29 @@ import java.util.*
 
 @Controller
 class PlantsController(
-        var featuresConfigurationService: FeaturesConfigurationDtoService,
         var plantTypeService: PlantTypeDtoService
 ) : PlantsApi {
 
     override fun getPlants(): ResponseEntity<List<PlantTypeDto>> {
-        println("getting all plants")
         var plants = plantTypeService.getAll()
         return ResponseEntity(plants, HttpStatus.OK)
     }
 
     override fun getPlant(id: UUID): ResponseEntity<PlantTypeDto> {
         var found = plantTypeService.getOne(id)
-        if( found != null) {
-            return ResponseEntity(found, HttpStatus.OK)
-        }
-        return ResponseEntity(HttpStatus.NOT_FOUND)
+        return if( found != null) {
+            ResponseEntity(found, HttpStatus.OK)
+        } else
+            ResponseEntity(HttpStatus.NOT_FOUND)
     }
 
      override fun postPlant(plantTypeDto: PlantTypeDto): ResponseEntity<PlantTypeDto> {
         var saved = plantTypeService.save(plantTypeDto)
         return ResponseEntity(saved, HttpStatus.OK)
+    }
+
+    override fun deletePlant(id: UUID): ResponseEntity<Unit> {
+        plantTypeService.delete(id)
+        return ResponseEntity(HttpStatus.OK)
     }
 }

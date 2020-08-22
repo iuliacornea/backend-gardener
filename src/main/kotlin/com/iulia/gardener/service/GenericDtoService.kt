@@ -30,5 +30,9 @@ abstract class GenericDtoService <Entity: UuidEntity, Dto, Mapper: GenericMapper
         return null
     }
 
+    fun delete(uuid: UUID) {
+        repository.deleteById(uuid)
+    }
+
     abstract fun getDtoId(dto: Dto): UUID?
 }
