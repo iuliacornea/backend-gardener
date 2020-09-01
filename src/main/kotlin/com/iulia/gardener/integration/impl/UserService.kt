@@ -21,7 +21,7 @@ class UserService(override var mapper: UserMapper, override var repository: User
         var user = repository.findByEmailAndPassword(email, password)
         var tokenCharPool = user.email + user.password
         if (user.token == null) {
-            var newToken = (1..6).map { i -> kotlin.random.Random.nextInt(0, tokenCharPool.length) }
+            var newToken = (1..6).map { kotlin.random.Random.nextInt(0, tokenCharPool.length) }
                     .map(tokenCharPool::get)
                     .joinToString("");
             user.token = newToken

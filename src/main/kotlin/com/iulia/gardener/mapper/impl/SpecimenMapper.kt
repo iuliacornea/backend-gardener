@@ -8,6 +8,7 @@ import com.iulia.gardener.integration.impl.UserService
 import org.openapitools.gardener.model.GrowingConfigurationDto
 import org.openapitools.gardener.model.PlantTypeDto
 import org.openapitools.gardener.model.SpecimenDto
+import java.util.*
 
 class SpecimenMapper(
         var growingConfigurationsMapper: GrowingConfigurationsMapper,
@@ -26,7 +27,7 @@ class SpecimenMapper(
         return Specimen(
                 id = dto.id,
                 name = dto.name,
-                appUserId =  UserService.getLoggedInUser().id!!,
+                appUserId =  UUID.randomUUID(),
                 growingConfigurations = growingConfigurations,
                 plantType = plantType,
                 season = dto.season

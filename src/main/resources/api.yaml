@@ -7,6 +7,26 @@ info:
 servers:
   - url: http://gardener.swagger.io/v1
 paths:
+  /greenhouse/stats:
+    post:
+      summary: The statistics from a plant monitoring device
+      operationId: postStats
+      tags:
+        - greenhouse
+      requestBody:
+        description: A greenhouse status
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GreenhouseStatsDto'
+      responses:
+        '200':
+          description: All plants of the application
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GreenhouseConfigDto"
   /users/new:
     post:
       summary: Create a new user with the given credentials.
@@ -406,9 +426,138 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  /specimens:
+    get:
+      summary: List of all specimen objects of the given user
+      operationId: getSpecimens
+      tags:
+        - specimens
+      parameters:
+        - in: query
+          name: userToken
+          required: false
+          schema:
+            type: string
+          description: The token of the user who makes the request
+      responses:
+        '200':
+          description: All specimens of the user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SpecimenDtos"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Save or update a specimen object. If no id is provided, we will create a new specimen. If an id is provided, we will update all the fields of the specimen, this includes updating to 'null' the fields which are not sent.
+      operationId: postSpecimen
+      tags:
+        - specimens
+      parameters:
+        - in: query
+          name: userToken
+          required: true
+          schema:
+            type: string
+          description: The token of the user who makes the request
+      requestBody:
+        description: A specimen object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpecimenDto'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpecimenDto'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /specimens/{id}:
+    get:
+      summary: One specimen
+      operationId: getSpecimen
+      tags:
+        - specimens
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          required: true
+          description: Uuid of the specimen
+      responses:
+        '200':
+          description: The specimen with the matching id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SpecimenDto"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Delete the specimen with the give id
+      operationId: deleteSpecimen
+      tags:
+        - specimens
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          required: true
+          description: Uuid of the specimen
+        - in: query
+          name: userToken
+          required: true
+          schema:
+            type: string
+          description: The token of the user who makes the request
+      responses:
+        '200':
+          description: The specimen with the matching id was deleted.
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 
 components:
   schemas:
+    GreenhouseStatsDto:
+      properties:
+        user:
+          type: string
+        airTemperature:
+          type: number
+        airHumidity:
+          type: number
+        soilMoisture:
+          type: number
+        photoresistance:
+          type: number
+    GreenhouseConfigDto:
+      properties:
+        soilMoisture:
+          type: number
     UserDto:
       required: ['email', 'password']
       properties:
@@ -518,6 +667,10 @@ components:
           $ref: '#/components/schemas/GrowingConfigurationDto'
         season:
           $ref: '#/components/schemas/Season'
+    SpecimenDtos:
+      type: array
+      items:
+        $ref: "#/components/schemas/SpecimenDto"
     StemType:
       type: string
       enum: ['WOODY', 'HERBACEOUS', 'NOT_VISIBLE']
