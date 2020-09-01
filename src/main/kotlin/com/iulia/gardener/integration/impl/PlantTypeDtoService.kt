@@ -1,10 +1,10 @@
-package com.iulia.gardener.service.impl
+package com.iulia.gardener.integration.impl
 
 import com.iulia.gardener.entity.PlantType
 import com.iulia.gardener.mapper.impl.PlantTypeMapper
 import org.openapitools.gardener.model.PlantTypeDto
 import com.iulia.gardener.repo.PlantTypeRepository
-import com.iulia.gardener.service.GenericDtoService
+import com.iulia.gardener.integration.GenericDtoService
 import org.springframework.stereotype.Component
 import java.util.*
 
@@ -30,5 +30,13 @@ class PlantTypeDtoService(
 
     override fun getDtoId(dto: PlantTypeDto): UUID? {
         return dto.id
+    }
+
+    fun getAllByUserUuid(userUUID: UUID): List<PlantTypeDto>? {
+        return repository.getAllByUserUuid(userUUID)?.map { mapper.toDto(it) }
+    }
+
+    fun getGlobalPlantTypes(): List<PlantTypeDto> {
+        return repository.getAllByUserUuid(null)!!.map { mapper.toDto(it) }
     }
 }

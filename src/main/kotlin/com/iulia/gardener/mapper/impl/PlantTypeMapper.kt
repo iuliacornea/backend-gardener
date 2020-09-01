@@ -25,7 +25,8 @@ class PlantTypeMapper(
                 description = dto.description,
                 featuresConfiguration = featuresConfig,
                 growingConfigurations = growingConfig,
-                image = dto.image?.toByteArray()
+                image = dto.image,
+                userUuid = null
         )
     }
 
@@ -39,7 +40,7 @@ class PlantTypeMapper(
                 description = entity.description,
                 featuresConfiguration = featuresConfig,
                 growingConfiguration = growingConfig,
-                image = entity.image?.toString()
+                image = entity.image
         )
     }
 

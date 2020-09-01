@@ -7,4 +7,6 @@ import java.util.*
 
 @Repository
 interface PlantTypeRepository: JpaRepository<PlantType, UUID> {
+
+    fun getAllByUserUuid(userUUID: UUID?): List<PlantType>?
 }

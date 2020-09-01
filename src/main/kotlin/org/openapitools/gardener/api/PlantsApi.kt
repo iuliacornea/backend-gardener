@@ -44,6 +44,7 @@ interface PlantsApi {
             produces = ["application/json"], 
             method = [RequestMethod.DELETE])
     fun deletePlant( @PathVariable("id") id: java.util.UUID
+,@NotNull  @RequestParam(value = "userToken", required = true) userToken: kotlin.String
 ): ResponseEntity<Unit> {
         return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
     }
@@ -63,7 +64,8 @@ interface PlantsApi {
             value = ["/plants"],
             produces = ["application/json"], 
             method = [RequestMethod.GET])
-    fun getPlants(): ResponseEntity<List<PlantTypeDto>> {
+    fun getPlants( @RequestParam(value = "userToken", required = false) userToken: kotlin.String?
+): ResponseEntity<List<PlantTypeDto>> {
         return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
     }
 
@@ -73,7 +75,8 @@ interface PlantsApi {
             produces = ["application/json"], 
             consumes = ["application/json"],
             method = [RequestMethod.POST])
-    fun postPlant( @Valid @RequestBody plantTypeDto: PlantTypeDto
+    fun postPlant(@NotNull  @RequestParam(value = "userToken", required = true) userToken: kotlin.String
+, @Valid @RequestBody plantTypeDto: PlantTypeDto
 ): ResponseEntity<PlantTypeDto> {
         return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
     }

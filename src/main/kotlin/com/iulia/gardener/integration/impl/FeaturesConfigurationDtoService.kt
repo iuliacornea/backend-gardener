@@ -1,9 +1,9 @@
-package com.iulia.gardener.service.impl
+package com.iulia.gardener.integration.impl
 
 import com.iulia.gardener.entity.FeaturesConfiguration
 import com.iulia.gardener.mapper.impl.FeaturesConfigurationMapper
 import com.iulia.gardener.repo.FeaturesConfigurationRepository
-import com.iulia.gardener.service.GenericDtoService
+import com.iulia.gardener.integration.GenericDtoService
 import org.openapitools.gardener.model.FeaturesConfigurationDto
 import org.springframework.stereotype.Service
 import java.util.*

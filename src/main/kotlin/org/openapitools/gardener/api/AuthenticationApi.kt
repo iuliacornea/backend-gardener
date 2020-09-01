@@ -6,7 +6,7 @@
 package org.openapitools.gardener.api
 
 import org.openapitools.gardener.model.Error
-import org.openapitools.gardener.model.GrowingConfigurationDto
+import org.openapitools.gardener.model.UserDto
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -36,47 +36,37 @@ import kotlin.collections.Map
 
 @Validated
 @RequestMapping("\${api.base-path:/v1}")
-interface GrowingConfigsApi {
+interface AuthenticationApi {
 
 
     @RequestMapping(
-            value = ["/growingConfigurations/{id}"],
+            value = ["/users/login"],
             produces = ["application/json"], 
-            method = [RequestMethod.DELETE])
-    fun deleteGrowingConfiguration( @PathVariable("id") id: java.util.UUID
-,@NotNull  @RequestParam(value = "userToken", required = true) userToken: kotlin.String
+            consumes = ["application/json"],
+            method = [RequestMethod.POST])
+    fun loginUser( @Valid @RequestBody userDto: UserDto
+): ResponseEntity<UserDto> {
+        return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
+    }
+
+
+    @RequestMapping(
+            value = ["/users/logout"],
+            produces = ["application/json"], 
+            method = [RequestMethod.POST])
+    fun logoutUser(@NotNull  @RequestParam(value = "userToken", required = true) userToken: kotlin.String
 ): ResponseEntity<Unit> {
         return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
     }
 
 
     @RequestMapping(
-            value = ["/growingConfigurations/{id}"],
-            produces = ["application/json"], 
-            method = [RequestMethod.GET])
-    fun getGrowingConfiguration( @PathVariable("id") id: java.util.UUID
-): ResponseEntity<GrowingConfigurationDto> {
-        return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
-    }
-
-
-    @RequestMapping(
-            value = ["/growingConfigurations"],
-            produces = ["application/json"], 
-            method = [RequestMethod.GET])
-    fun getGrowingConfigurations(): ResponseEntity<List<GrowingConfigurationDto>> {
-        return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
-    }
-
-
-    @RequestMapping(
-            value = ["/growingConfigurations"],
+            value = ["/users/new"],
             produces = ["application/json"], 
             consumes = ["application/json"],
             method = [RequestMethod.POST])
-    fun postGrowingConfiguration(@NotNull  @RequestParam(value = "userToken", required = true) userToken: kotlin.String
-, @Valid @RequestBody growingConfigurationDto: GrowingConfigurationDto
-): ResponseEntity<GrowingConfigurationDto> {
+    fun signUpUser( @Valid @RequestBody userDto: UserDto
+): ResponseEntity<UserDto> {
         return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
     }
 }

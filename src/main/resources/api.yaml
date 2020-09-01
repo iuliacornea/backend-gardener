@@ -7,12 +7,93 @@ info:
 servers:
   - url: http://gardener.swagger.io/v1
 paths:
+  /users/new:
+    post:
+      summary: Create a new user with the given credentials.
+      operationId: signUpUser
+      tags:
+        - authentication
+      requestBody:
+        description: User credentials
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDto"
+      responses:
+        '200':
+          description: Sign up successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDto"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /users/login:
+    post:
+      summary: Login with the given credentials. Retrieve the user token
+      operationId: loginUser
+      tags:
+        - authentication
+      requestBody:
+        description: User credentials
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDto"
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /users/logout:
+    post:
+      summary: Logout user with the given token
+      operationId: logoutUser
+      tags:
+        - authentication
+      parameters:
+        - in: query
+          name: userToken
+          required: true
+          schema:
+            type: string
+          description: The token of the user to be logged out
+      responses:
+        '200':
+          description: Logout successful
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
   /plants:
     get:
       summary: List of all plant objects
       operationId: getPlants
       tags:
         - plants
+      parameters:
+        - in: query
+          name: userToken
+          required: false
+          schema:
+            type: string
+          description: The token of the user who makes the request
       responses:
         '200':
           description: All plants of the application
@@ -31,6 +112,13 @@ paths:
       operationId: postPlant
       tags:
         - plants
+      parameters:
+        - in: query
+          name: userToken
+          required: true
+          schema:
+            type: string
+          description: The token of the user who makes the request
       requestBody:
         description: A plant object
         required: true
@@ -91,6 +179,12 @@ paths:
             format: uuid
           required: true
           description: Uuid of the plant
+        - in: query
+          name: userToken
+          required: true
+          schema:
+            type: string
+          description: The token of the user who makes the request
       responses:
         '200':
           description: The plant with the matching id was deleted.
@@ -124,6 +218,13 @@ paths:
         - features
       summary: Save or update a feature configuration object. If no id is provided, we will create a new feature configuration. If an id is provided, we will update all the fields of the feature configuration, this includes updating to 'null' the fields which are not sent.
       operationId: postFeatureConfiguration
+      parameters:
+        - in: query
+          name: userToken
+          required: true
+          schema:
+            type: string
+          description: The token of the user who makes the request
       requestBody:
         description: A feature configuration object
         required: true
@@ -184,6 +285,12 @@ paths:
             format: uuid
           required: true
           description: Uuid of the feature configuration
+        - in: query
+          name: userToken
+          required: true
+          schema:
+            type: string
+          description: The token of the user who makes the request
       responses:
         '200':
           description: The feature configuration with the matching id was deleted.
@@ -217,6 +324,13 @@ paths:
         - growingConfigs
       summary: Save or update a growing configurations object. If no id is provided, we will create a new growing configuration. If an id is provided, we will update all the fields of the growing configuration, this includes updating to 'null' the fields which are not sent.
       operationId: postGrowingConfiguration
+      parameters:
+        - in: query
+          name: userToken
+          required: true
+          schema:
+            type: string
+          description: The token of the user who makes the request
       requestBody:
         description: A growing configuration object
         required: true
@@ -277,6 +391,12 @@ paths:
             format: uuid
           required: true
           description: Uuid of the growing configuration
+        - in: query
+          name: userToken
+          required: true
+          schema:
+            type: string
+          description: The token of the user who makes the request
       responses:
         '200':
           description: The growing configuration with the matching id was deleted.
@@ -289,6 +409,20 @@ paths:
 
 components:
   schemas:
+    UserDto:
+      required: ['email', 'password']
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        token:
+          type: string
     PlantTypeDto:
       required: ['name', 'featuresConfiguration', 'growingConfiguration']
       properties:

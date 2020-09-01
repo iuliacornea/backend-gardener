@@ -3,6 +3,7 @@ create table plant_type(
     features_configuration      uuid            not null,
     growing_configuration       uuid            not null,
     name                        varchar(255)    not null,
-    description                 varchar(255),
-    image                       bytea
+    description                 varchar(1024),
+    userUuid                    uuid,
+    image                       varchar(512)
 );

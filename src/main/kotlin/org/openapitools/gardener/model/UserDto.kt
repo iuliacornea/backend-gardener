@@ -2,8 +2,6 @@ package org.openapitools.gardener.model
 
 import java.util.Objects
 import com.fasterxml.jackson.annotation.JsonProperty
-import org.openapitools.gardener.model.PlantFeature
-import org.openapitools.gardener.model.SoilType
 import javax.validation.constraints.DecimalMax
 import javax.validation.constraints.DecimalMin
 import javax.validation.constraints.Max
@@ -14,20 +12,25 @@ import javax.validation.constraints.Size
 
 /**
  * 
+ * @param email 
+ * @param password 
  * @param id 
- * @param name 
- * @param features 
- * @param soilType 
+ * @param username 
+ * @param token 
  */
-data class Plant(
+data class UserDto(
+
+    @get:NotNull 
+    @JsonProperty("email") val email: kotlin.String,
+
+    @get:NotNull 
+    @JsonProperty("password") val password: kotlin.String,
 
     @JsonProperty("id") val id: java.util.UUID? = null,
 
-    @JsonProperty("name") val name: kotlin.String? = null,
+    @JsonProperty("username") val username: kotlin.String? = null,
 
-    @JsonProperty("features") val features: PlantFeature? = null,
-
-    @JsonProperty("soilType") val soilType: SoilType? = null
+    @JsonProperty("token") val token: kotlin.String? = null
 ) {
 
 }

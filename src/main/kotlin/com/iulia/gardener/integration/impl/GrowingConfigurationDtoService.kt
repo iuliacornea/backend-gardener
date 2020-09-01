@@ -1,10 +1,10 @@
-package com.iulia.gardener.service.impl
+package com.iulia.gardener.integration.impl
 
 import com.iulia.gardener.entity.GrowingConfigurations
 import com.iulia.gardener.mapper.impl.GrowingConfigurationsMapper
 import org.openapitools.gardener.model.GrowingConfigurationDto
 import com.iulia.gardener.repo.GrowingConfigurationsRepository
-import com.iulia.gardener.service.GenericDtoService
+import com.iulia.gardener.integration.GenericDtoService
 import org.springframework.stereotype.Component
 import java.util.*
 

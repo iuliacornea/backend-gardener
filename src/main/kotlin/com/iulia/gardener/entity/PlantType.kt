@@ -36,7 +36,10 @@ class PlantType (
         var growingConfigurations: GrowingConfigurations,
 
         @Column
-        var image: ByteArray?
+        var userUuid: UUID?,
+
+        @Column
+        var image: String?
 ): UuidEntity {
         override fun getUuid(): UUID {
                 return id!!

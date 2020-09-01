@@ -1,17 +1,22 @@
 package com.iulia.gardener.controller
 
-import com.iulia.gardener.service.impl.FeaturesConfigurationDtoService
+import com.iulia.gardener.integration.impl.FeaturesConfigurationDtoService
 import org.openapitools.gardener.api.FeaturesApi
 import org.openapitools.gardener.model.FeaturesConfigurationDto
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestParam
 import java.util.*
+import javax.validation.Valid
+import javax.validation.constraints.NotNull
 
 @Controller
 class FeaturesController( var service: FeaturesConfigurationDtoService): FeaturesApi {
 
-    override fun deleteFeatureConfiguration(id: UUID): ResponseEntity<Unit> {
+    override fun deleteFeatureConfiguration(@PathVariable(value = "id") id: UUID, @NotNull @RequestParam(required = true, value = "userToken") userToken: String): ResponseEntity<Unit> {
         service.delete(id)
         return ResponseEntity(HttpStatus.OK)
     }
@@ -29,7 +34,7 @@ class FeaturesController( var service: FeaturesConfigurationDtoService): Feature
         return ResponseEntity(results, HttpStatus.OK)
     }
 
-    override fun postFeatureConfiguration(featuresConfigurationDto: FeaturesConfigurationDto): ResponseEntity<FeaturesConfigurationDto> {
+    override fun postFeatureConfiguration(@NotNull @RequestParam(required = true, value = "userToken") userToken: String, @Valid @RequestBody featuresConfigurationDto: FeaturesConfigurationDto): ResponseEntity<FeaturesConfigurationDto> {
         var updated = service.save(featuresConfigurationDto)
         return ResponseEntity(updated, HttpStatus.OK)
     }

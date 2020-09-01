@@ -1,4 +1,4 @@
-package com.iulia.gardener.service
+package com.iulia.gardener.integration
 
 import com.iulia.gardener.entity.UuidEntity
 import com.iulia.gardener.mapper.GenericMapper

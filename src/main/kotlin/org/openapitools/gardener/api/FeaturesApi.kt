@@ -44,6 +44,7 @@ interface FeaturesApi {
             produces = ["application/json"], 
             method = [RequestMethod.DELETE])
     fun deleteFeatureConfiguration( @PathVariable("id") id: java.util.UUID
+,@NotNull  @RequestParam(value = "userToken", required = true) userToken: kotlin.String
 ): ResponseEntity<Unit> {
         return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
     }
@@ -73,7 +74,8 @@ interface FeaturesApi {
             produces = ["application/json"], 
             consumes = ["application/json"],
             method = [RequestMethod.POST])
-    fun postFeatureConfiguration( @Valid @RequestBody featuresConfigurationDto: FeaturesConfigurationDto
+    fun postFeatureConfiguration(@NotNull  @RequestParam(value = "userToken", required = true) userToken: kotlin.String
+, @Valid @RequestBody featuresConfigurationDto: FeaturesConfigurationDto
 ): ResponseEntity<FeaturesConfigurationDto> {
         return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
     }
