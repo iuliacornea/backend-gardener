@@ -16,6 +16,7 @@ import javax.validation.constraints.Size
 /**
  * 
  * @param name 
+ * @param userId 
  * @param id 
  * @param plantType 
  * @param growingConfiguration 
@@ -25,6 +26,9 @@ data class SpecimenDto(
 
     @get:NotNull 
     @JsonProperty("name") val name: kotlin.String,
+
+    @get:NotNull 
+    @JsonProperty("userId") val userId: java.util.UUID,
 
     @JsonProperty("id") val id: java.util.UUID? = null,
 

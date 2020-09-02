@@ -7,4 +7,6 @@ import java.util.*
 
 @Repository
 interface GrowingConfigurationsRepository: JpaRepository<GrowingConfigurations, UUID> {
+
+    fun getAllByAppUserId(appUserId: UUID?): List<GrowingConfigurations>?
 }

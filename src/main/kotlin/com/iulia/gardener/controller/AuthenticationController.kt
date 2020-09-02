@@ -1,6 +1,6 @@
 package com.iulia.gardener.controller
 
-import com.iulia.gardener.integration.impl.UserService
+import com.iulia.gardener.service.impl.UserService
 import org.openapitools.gardener.api.AuthenticationApi
 import org.openapitools.gardener.model.UserDto
 import org.springframework.dao.EmptyResultDataAccessException

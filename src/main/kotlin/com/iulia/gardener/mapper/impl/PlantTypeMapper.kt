@@ -26,7 +26,7 @@ class PlantTypeMapper(
                 featuresConfiguration = featuresConfig,
                 growingConfigurations = growingConfig,
                 image = dto.image,
-                userUuid = null
+                appUserId = dto.userId
         )
     }
 
@@ -40,7 +40,8 @@ class PlantTypeMapper(
                 description = entity.description,
                 featuresConfiguration = featuresConfig,
                 growingConfiguration = growingConfig,
-                image = entity.image
+                image = entity.image,
+                userId = entity.appUserId
         )
     }
 

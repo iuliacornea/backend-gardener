@@ -7,4 +7,6 @@ import java.util.*
 
 @Repository
 interface SpecimenRepository : JpaRepository<Specimen, UUID> {
+
+    fun getAllByAppUserId(appUserId: UUID): List<Specimen>?
 }

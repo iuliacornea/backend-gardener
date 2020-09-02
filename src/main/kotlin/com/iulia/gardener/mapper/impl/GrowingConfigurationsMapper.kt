@@ -18,7 +18,8 @@ class GrowingConfigurationsMapper: GenericMapper<GrowingConfigurationDto, Growin
                 soilHumiditySummer = dto.soilHumiditySummer,
                 soilHumidityWinter = dto.soilHumidityWinter,
                 soilQuantity = dto.soilQuantity,
-                soilType = dto.soilType
+                soilType = dto.soilType,
+                appUserId = dto.userId
 
         )
     }
@@ -34,7 +35,8 @@ class GrowingConfigurationsMapper: GenericMapper<GrowingConfigurationDto, Growin
                 soilHumiditySummer = entity.soilHumiditySummer,
                 soilHumidityWinter = entity.soilHumidityWinter,
                 soilQuantity = entity.soilQuantity,
-                soilType = entity.soilType
+                soilType = entity.soilType,
+                userId = entity.appUserId
 
         )
     }

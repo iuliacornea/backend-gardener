@@ -20,6 +20,7 @@ import javax.validation.constraints.Size
  * @param id 
  * @param description 
  * @param image 
+ * @param userId 
  */
 data class PlantTypeDto(
 
@@ -36,7 +37,9 @@ data class PlantTypeDto(
 
     @JsonProperty("description") val description: kotlin.String? = null,
 
-    @JsonProperty("image") val image: kotlin.String? = null
+    @JsonProperty("image") val image: kotlin.String? = null,
+
+    @JsonProperty("userId") val userId: java.util.UUID? = null
 ) {
 
 }

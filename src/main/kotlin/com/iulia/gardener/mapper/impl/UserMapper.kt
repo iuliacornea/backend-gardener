@@ -1,6 +1,7 @@
 package com.iulia.gardener.mapper.impl
 
 import com.iulia.gardener.entity.AppUser
+import com.iulia.gardener.entity.UserRole
 import com.iulia.gardener.mapper.GenericMapper
 import org.openapitools.gardener.model.UserDto
 import org.springframework.stereotype.Component
@@ -14,7 +15,8 @@ class UserMapper : GenericMapper<UserDto, AppUser> {
                 email = dto.email,
                 username = dto.username,
                 password = dto.password,
-                token = dto.token
+                token = dto.token,
+                role = UserRole.USER
         )
     }
 

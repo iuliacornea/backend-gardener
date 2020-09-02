@@ -55,6 +55,7 @@ interface SpecimensApi {
             produces = ["application/json"], 
             method = [RequestMethod.GET])
     fun getSpecimen( @PathVariable("id") id: java.util.UUID
+,@NotNull  @RequestParam(value = "userToken", required = true) userToken: kotlin.String
 ): ResponseEntity<SpecimenDto> {
         return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
     }
@@ -64,7 +65,7 @@ interface SpecimensApi {
             value = ["/specimens"],
             produces = ["application/json"], 
             method = [RequestMethod.GET])
-    fun getSpecimens( @RequestParam(value = "userToken", required = false) userToken: kotlin.String?
+    fun getSpecimens(@NotNull  @RequestParam(value = "userToken", required = true) userToken: kotlin.String
 ): ResponseEntity<List<SpecimenDto>> {
         return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
     }

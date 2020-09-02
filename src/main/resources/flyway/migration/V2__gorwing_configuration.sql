@@ -8,5 +8,6 @@ create table growing_configuration (
     air_temperature_summer      smallint,
     air_temperature_winter      smallint,
     light_intensity_summer      varchar(255),
-    light_intensity_winter      varchar(255)
+    light_intensity_winter      varchar(255),
+    app_user                    uuid
 );

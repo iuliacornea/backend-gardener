@@ -4,12 +4,12 @@ import com.iulia.gardener.entity.GrowingConfigurations
 import com.iulia.gardener.entity.PlantType
 import com.iulia.gardener.entity.Specimen
 import com.iulia.gardener.mapper.GenericMapper
-import com.iulia.gardener.integration.impl.UserService
 import org.openapitools.gardener.model.GrowingConfigurationDto
 import org.openapitools.gardener.model.PlantTypeDto
 import org.openapitools.gardener.model.SpecimenDto
-import java.util.*
+import org.springframework.stereotype.Component
 
+@Component
 class SpecimenMapper(
         var growingConfigurationsMapper: GrowingConfigurationsMapper,
         var plantTypeMapper: PlantTypeMapper
@@ -27,7 +27,7 @@ class SpecimenMapper(
         return Specimen(
                 id = dto.id,
                 name = dto.name,
-                appUserId =  UUID.randomUUID(),
+                appUserId =  dto.userId,
                 growingConfigurations = growingConfigurations,
                 plantType = plantType,
                 season = dto.season
@@ -48,7 +48,8 @@ class SpecimenMapper(
                 name = entity.name,
                 growingConfiguration = growingConfigurations,
                 plantType = plantType,
-                season = entity.season
+                season = entity.season,
+                userId = entity.appUserId
         )
     }
 }

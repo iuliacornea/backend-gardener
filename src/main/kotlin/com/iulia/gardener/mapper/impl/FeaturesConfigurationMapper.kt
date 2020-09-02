@@ -20,7 +20,8 @@ class FeaturesConfigurationMapper: GenericMapper<FeaturesConfigurationDto, Featu
                 leafVeinType = dto.leafVeinType,
                 flowerExistance = dto.flowerExistance,
                 flowerShape = dto.flowerShape,
-                flowerPetals = dto.flowerPetals
+                flowerPetals = dto.flowerPetals,
+                appUserId = dto.userId
         )
     }
 
@@ -36,7 +37,8 @@ class FeaturesConfigurationMapper: GenericMapper<FeaturesConfigurationDto, Featu
                 leafVeinType = entity.leafVeinType,
                 flowerExistance = entity.flowerExistance,
                 flowerShape = entity.flowerShape,
-                flowerPetals = entity.flowerPetals
+                flowerPetals = entity.flowerPetals,
+                userId = entity.appUserId
         )
     }
 

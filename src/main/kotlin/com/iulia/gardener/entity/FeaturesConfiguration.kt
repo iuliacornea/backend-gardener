@@ -68,7 +68,10 @@ class FeaturesConfiguration (
 
         @Enumerated(EnumType.STRING)
         @Column
-        var flowerPetals: FlowerPetals?
+        var flowerPetals: FlowerPetals?,
+
+        @Column(name = "app_user")
+        var appUserId: UUID?
 ): UuidEntity {
         override fun getUuid(): UUID {
                 return id!!

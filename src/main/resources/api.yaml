@@ -435,7 +435,7 @@ paths:
       parameters:
         - in: query
           name: userToken
-          required: false
+          required: true
           schema:
             type: string
           description: The token of the user who makes the request
@@ -498,6 +498,12 @@ paths:
             format: uuid
           required: true
           description: Uuid of the specimen
+        - in: query
+          name: userToken
+          required: true
+          schema:
+            type: string
+          description: The token of the user who makes the request
       responses:
         '200':
           description: The specimen with the matching id
@@ -588,6 +594,9 @@ components:
           $ref: '#/components/schemas/FeaturesConfigurationDto'
         growingConfiguration:
           $ref: '#/components/schemas/GrowingConfigurationDto'
+        userId:
+          type: string
+          format: uuid
     PlantTypeDtos:
       type: array
       items:
@@ -618,6 +627,9 @@ components:
           $ref: '#/components/schemas/FlowerShape'
         flowerPetals:
           $ref: '#/components/schemas/FlowerPetals'
+        userId:
+          type: string
+          format: uuid
     FeaturesConfigurationDtos:
       type: array
       items:
@@ -649,12 +661,15 @@ components:
           $ref: '#/components/schemas/FiveDegreeScale'
         lightIntensityWinter:
           $ref: '#/components/schemas/FiveDegreeScale'
+        userId:
+          type: string
+          format: uuid
     GrowingConfigurationDtos:
       type: array
       items:
         $ref: '#/components/schemas/GrowingConfigurationDto'
     SpecimenDto:
-      required: ['name']
+      required: ['name', 'userId']
       properties:
         id:
           type: string
@@ -667,6 +682,9 @@ components:
           $ref: '#/components/schemas/GrowingConfigurationDto'
         season:
           $ref: '#/components/schemas/Season'
+        userId:
+          type: string
+          format: uuid
     SpecimenDtos:
       type: array
       items:

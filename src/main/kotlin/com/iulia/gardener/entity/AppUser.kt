@@ -5,6 +5,8 @@ import java.net.PasswordAuthentication
 import java.util.*
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.EnumType
+import javax.persistence.Enumerated
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.Table
@@ -31,6 +33,10 @@ class AppUser (
         @Column
         var password: String,
 
+        @Enumerated(EnumType.STRING)
+        @Column
+        var role: UserRole,
+
         @Column
         var token: String?
 
@@ -38,4 +44,9 @@ class AppUser (
         override fun getUuid(): UUID {
                 return id!!
         }
+}
+
+enum class UserRole (var value: String) {
+        ADMIN("ADMIN"),
+        USER("USER")
 }

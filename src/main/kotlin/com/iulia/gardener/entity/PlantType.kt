@@ -35,8 +35,8 @@ class PlantType (
         @JoinColumn(name = "growing_configuration", nullable = false)
         var growingConfigurations: GrowingConfigurations,
 
-        @Column
-        var userUuid: UUID?,
+        @Column(name = "app_user")
+        var appUserId: UUID?,
 
         @Column
         var image: String?

@@ -1,12 +1,12 @@
-package com.iulia.gardener.integration.impl
+package com.iulia.gardener.service.impl
 
 import com.iulia.gardener.entity.AppUser
+import com.iulia.gardener.entity.UserRole
 import com.iulia.gardener.mapper.impl.UserMapper
 import com.iulia.gardener.repo.UserRepository
-import com.iulia.gardener.integration.GenericDtoService
+import com.iulia.gardener.service.GenericDtoService
 import org.openapitools.gardener.model.UserDto
 import org.springframework.stereotype.Service
-import java.security.InvalidKeyException
 import java.util.*
 
 @Service
@@ -46,7 +46,7 @@ class UserService(override var mapper: UserMapper, override var repository: User
     }
 
     fun isAdmin(userToken: String): Boolean {
-        return getUserByToken(userToken).email == "iulia.cornea5@gmail.com";
+        return repository.findByToken(userToken).role == UserRole.ADMIN;
     }
 
 }

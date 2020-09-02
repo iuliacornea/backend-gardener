@@ -3,5 +3,6 @@ create table app_user(
     email       varchar(255)    not null unique,
     password    varchar(255)    not null,
     username        varchar(255),
+    role            varchar(255) not null,
     token       varchar(255)
 );

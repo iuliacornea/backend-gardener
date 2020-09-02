@@ -9,5 +9,6 @@ create table features_configuration(
     leaf_vein_type                  varchar(255),
     flower_existance                varchar(255),
     flower_shape                    varchar(255),
-    flower_petals                   varchar(255)
+    flower_petals                   varchar(255),
+    app_user                        uuid
 );

@@ -7,4 +7,6 @@ import java.util.*
 
 @Repository
 interface FeaturesConfigurationRepository: JpaRepository<FeaturesConfiguration, UUID> {
+
+    fun getAllByAppUserId(appUserId: UUID?): List<FeaturesConfiguration>?
 }

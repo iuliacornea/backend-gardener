@@ -24,6 +24,7 @@ import javax.validation.constraints.Size
  * @param airTemperatureWinter 
  * @param lightIntensitySummer 
  * @param lightIntensityWinter 
+ * @param userId 
  */
 data class GrowingConfigurationDto(
 
@@ -45,7 +46,9 @@ data class GrowingConfigurationDto(
 
     @JsonProperty("lightIntensitySummer") val lightIntensitySummer: FiveDegreeScale? = null,
 
-    @JsonProperty("lightIntensityWinter") val lightIntensityWinter: FiveDegreeScale? = null
+    @JsonProperty("lightIntensityWinter") val lightIntensityWinter: FiveDegreeScale? = null,
+
+    @JsonProperty("userId") val userId: java.util.UUID? = null
 ) {
 
 }

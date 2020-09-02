@@ -53,7 +53,10 @@ class GrowingConfigurations (
 
         @Enumerated(EnumType.STRING)
         @Column
-        var lightIntensityWinter: FiveDegreeScale?
+        var lightIntensityWinter: FiveDegreeScale?,
+
+        @Column(name = "app_user")
+        var appUserId: UUID?
 ): UuidEntity {
         override fun getUuid(): UUID {
                 return id!!

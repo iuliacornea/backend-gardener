@@ -1,12 +1,13 @@
-package com.iulia.gardener.integration
+package com.iulia.gardener.service
 
 import com.iulia.gardener.entity.UuidEntity
 import com.iulia.gardener.mapper.GenericMapper
+import com.iulia.gardener.service.impl.UserService
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.repository.findByIdOrNull
 import java.util.*
 
-abstract class GenericDtoService <Entity: UuidEntity, Dto, Mapper: GenericMapper<Dto, Entity>, Repository: JpaRepository<Entity, UUID>> {
+abstract class GenericDtoService <Entity: UuidEntity, Dto, Mapper: GenericMapper<Dto, Entity>, Repository: JpaRepository<Entity, UUID>> (){
 
     abstract var mapper: Mapper
     abstract var repository: Repository

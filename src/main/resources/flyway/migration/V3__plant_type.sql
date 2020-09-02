@@ -4,6 +4,6 @@ create table plant_type(
     growing_configuration       uuid            not null,
     name                        varchar(255)    not null,
     description                 varchar(1024),
-    userUuid                    uuid,
+    app_user                    uuid,
     image                       varchar(512)
 );
