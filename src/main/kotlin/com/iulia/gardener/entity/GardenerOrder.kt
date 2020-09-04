@@ -14,7 +14,7 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "gardener_order")
-class GardenerOrderEntity (
+class GardenerOrder (
 
         @Id
         @GenericGenerator(name = "idGenerator", strategy = "org.hibernate.id.UUIDGenerator")
@@ -31,8 +31,8 @@ class GardenerOrderEntity (
         @Column
         var wifiNetwork: String,
 
-        @Column
-        var wifiPass: String,
+        @Column(name = "wifi_pass")
+        var wifiPassword: String,
 
         @Enumerated(EnumType.STRING)
         @Column

@@ -5,8 +5,8 @@
 */
 package org.openapitools.gardener.api
 
-import org.openapitools.gardener.model.GreenhouseConfigDto
-import org.openapitools.gardener.model.GreenhouseMessageDto
+import org.openapitools.gardener.model.Error
+import org.openapitools.gardener.model.GardenerDto
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -36,16 +36,16 @@ import kotlin.collections.Map
 
 @Validated
 @RequestMapping("\${api.base-path:/v1}")
-interface GreenhouseApi {
+interface GardenersApi {
 
 
     @RequestMapping(
-            value = ["/greenhouse/stats"],
+            value = ["/gardeners"],
             produces = ["application/json"], 
-            consumes = ["application/json"],
-            method = [RequestMethod.POST])
-    fun postStats( @Valid @RequestBody greenhouseMessageDto: GreenhouseMessageDto
-): ResponseEntity<GreenhouseConfigDto> {
+            method = [RequestMethod.GET])
+    fun getGardeners(@NotNull  @RequestParam(value = "userToken", required = true) userToken: kotlin.String
+, @RequestParam(value = "userId", required = false) userId: java.util.UUID?
+): ResponseEntity<List<GardenerDto>> {
         return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
     }
 }

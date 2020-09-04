@@ -5,7 +5,7 @@ create table specimen
     growing_configuration uuid,
     app_user              uuid        not null,
     name                  varchar(50) not null,
-    season                varchar(23),
+    season                varchar,
     created_at            timestamp   not null,
     gardener              uuid,
     constraint fk_specimen_plant_type foreign key (plant_type) references plant_type (id),

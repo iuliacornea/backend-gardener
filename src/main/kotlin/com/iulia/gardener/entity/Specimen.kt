@@ -31,7 +31,7 @@ class Specimen(
 
         @ManyToOne(optional = true)
         @JoinColumn(name = "growing_configuration", nullable = true)
-        var growingConfigurations: GrowingConfigurations?,
+        var growingConfiguration: GrowingConfiguration?,
 
         @Column(name = "app_user")
         var appUserId: UUID,
@@ -50,7 +50,7 @@ class Specimen(
         @OneToOne(optional = true)
         @JoinColumn(
                 name = "gardener", nullable = true, updatable = false)
-        var gardenerEntity: GardenerEntity?
+        var gardener: Gardener?
 ) : UuidEntity {
     override fun getUuid(): UUID {
         return id!!

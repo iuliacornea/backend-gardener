@@ -5,8 +5,9 @@
 */
 package org.openapitools.gardener.api
 
-import org.openapitools.gardener.model.GreenhouseConfigDto
-import org.openapitools.gardener.model.GreenhouseMessageDto
+import org.openapitools.gardener.model.Error
+import org.openapitools.gardener.model.GardenerOrderDto
+import org.openapitools.gardener.model.OrderStatus
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -36,16 +37,29 @@ import kotlin.collections.Map
 
 @Validated
 @RequestMapping("\${api.base-path:/v1}")
-interface GreenhouseApi {
+interface OrdersApi {
 
 
     @RequestMapping(
-            value = ["/greenhouse/stats"],
+            value = ["/orders"],
+            produces = ["application/json"], 
+            method = [RequestMethod.GET])
+    fun getOrders(@NotNull  @RequestParam(value = "userToken", required = true) userToken: kotlin.String
+, @RequestParam(value = "userId", required = false) userId: java.util.UUID?
+, @RequestParam(value = "status", required = false) status: kotlin.collections.List<OrderStatus>?
+): ResponseEntity<List<GardenerOrderDto>> {
+        return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
+    }
+
+
+    @RequestMapping(
+            value = ["/orders"],
             produces = ["application/json"], 
             consumes = ["application/json"],
             method = [RequestMethod.POST])
-    fun postStats( @Valid @RequestBody greenhouseMessageDto: GreenhouseMessageDto
-): ResponseEntity<GreenhouseConfigDto> {
+    fun postOrder(@NotNull  @RequestParam(value = "userToken", required = true) userToken: kotlin.String
+, @Valid @RequestBody gardenerOrderDto: GardenerOrderDto
+): ResponseEntity<GardenerOrderDto> {
         return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
     }
 }

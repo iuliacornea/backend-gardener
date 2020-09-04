@@ -22,7 +22,7 @@ class PlantTypeDtoService(
 
         var entity = mapper.toEntity(dto)
         entity.featuresConfiguration.id = features.id
-        entity.growingConfigurations.id = growingConfiguration.id
+        entity.growingConfiguration.id = growingConfiguration.id
 
         repository.saveAndFlush(entity)
         return mapper.toDto(entity)

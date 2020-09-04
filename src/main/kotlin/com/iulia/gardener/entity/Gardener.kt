@@ -5,15 +5,15 @@ import java.sql.Timestamp
 import java.util.*
 import javax.persistence.Column
 import javax.persistence.Entity
-import javax.persistence.EnumType
-import javax.persistence.Enumerated
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.OneToOne
 import javax.persistence.Table
 
 @Entity
 @Table(name = "pot_gardener")
-class GardenerEntity (
+class Gardener (
 
         @Id
         @GenericGenerator(name = "idGenerator", strategy = "org.hibernate.id.UUIDGenerator")
@@ -30,12 +30,14 @@ class GardenerEntity (
         @Column
         var wifiNetwork: String,
 
-        @Column
-        var wifiPass: String,
+        @Column(name = "wifi_pass")
+        var wifiPassword: String,
 
         @Column
         var createdAt: Timestamp,
 
-        @Column
-        var orderId: UUID
+        @OneToOne(optional = false)
+        @JoinColumn(
+                name = "order_id", nullable = false, updatable = false)
+        var order: GardenerOrder
 )

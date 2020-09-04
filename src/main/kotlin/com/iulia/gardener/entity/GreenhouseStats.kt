@@ -18,29 +18,43 @@ class GreenhouseStats(
         @Column
         var id: UUID? = null,
 
-        @Column
-        var gardener: UUID,
+        @Column(name = "gardener")
+        var gardenerId: UUID,
 
         @Column
-        var specimen: UUID,
+        var specimen: UUID?,
 
+        /* raw value */
         @Column
         var airTemperatureRaw: Int,
 
+        /* air temperature in Celsius degrees */
+        @Column
+        var airTemperatureCelsius: Int,
+
+        /* raw value */
         @Column
         var airHumidityRaw: Int,
 
+        /* air humidity in percentages where 100%=rain */
         @Column
-        var soilMoidtureRaw: Int,
+        var airHumidityPercentafe: Int,
 
+        /* raw value is between 0 to 1023 */
         @Column
-        var soilMoidturePercentage: Int,
+        var soilMoistureRaw: Int,
 
+        /* computed from raw value where 100% = */
         @Column
-        var photoresistanceRaw: Int,
+        var soilMoisturePercentage: Int,
 
+        /* raw value measured with the photoreceptor */
         @Column
-        var photoresistanceLux: Int,
+        var lightIntensityRaw: Int,
+
+        /* light intensity in lux computed from the photoreceptor value*/
+        @Column
+        var lightIntensityLux: Int,
 
         @Column
         var receivedAt: Timestamp

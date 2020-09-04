@@ -7,6 +7,112 @@ info:
 servers:
   - url: http://gardener.swagger.io/v1
 paths:
+  /orders:
+    post:
+      summary: Save or update the given order.
+      operationId: postOrder
+      tags:
+        - orders
+      parameters:
+        - in: query
+          name: userToken
+          required: true
+          schema:
+            type: string
+          description: The token of the user making the request
+      requestBody:
+        description: A gardener order
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GardenerOrderDto'
+      responses:
+        '200':
+          description: Order was registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GardenerOrderDto'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    get:
+      summary: Get the orders base on the given params.
+      operationId: getOrders
+      tags:
+        - orders
+      parameters:
+        - in: query
+          name: userToken
+          required: true
+          schema:
+            type: string
+          description: The token of the user making the request
+        - in: query
+          name: userId
+          required: false
+          schema:
+            type: string
+            format: uuid
+          description: Filter orders by this user
+        - in: query
+          name: status
+          required: false
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/OrderStatus'
+          description: Filter orders by this statuses
+      responses:
+        '200':
+          description: Orders
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GardenerOrderDtos'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /gardeners:
+    get:
+      summary: 'Get all the gardeners'
+      operationId: getGardeners
+      tags:
+        - gardeners
+      parameters:
+        - in: query
+          name: userToken
+          required: true
+          schema:
+            type: string
+          description: The token of the user making the request
+        - in: query
+          name: userId
+          required: false
+          schema:
+            type: string
+            format: uuid
+          description: Filter gardeners by this user
+      responses:
+        '200':
+          description: Gardeners
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GardenerDtos'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
   /greenhouse/stats:
     post:
       summary: The statistics from a plant monitoring device
@@ -19,7 +125,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GreenhouseStatsDto'
+              $ref: '#/components/schemas/GreenhouseMessageDto'
       responses:
         '200':
           description: All plants of the application
@@ -548,22 +654,80 @@ paths:
 
 components:
   schemas:
-    GreenhouseStatsDto:
+    GardenerDto:
+      required: ['name','userId','wifiNetwork','wifiPassword', 'createdAt', 'order']
       properties:
-        user:
+        id:
           type: string
+          format: uuid
+        name:
+          type: string
+        userId:
+          type: string
+          format: uuid
+        wifiNetwork:
+          type: string
+        wifiPassword:
+          type: string
+        order:
+          $ref: '#/components/schemas/GardenerOrderDto'
+        createdAt:
+          type: string
+          format: date-time
+    GardenerDtos:
+      type: array
+      items:
+        $ref: '#/components/schemas/GardenerDto'
+    GardenerOrderDto:
+      required: ['gardenerName', 'userId', 'wifiNetwork', 'wifiPassword', 'createdAt', 'status']
+      properties:
+        id:
+          type: string
+          format: uuid
+        gardenerName:
+          type: string
+        userId:
+          type: string
+          format: uuid
+        wifiNetwork:
+          type: string
+        wifiPassword:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        status:
+          $ref: '#/components/schemas/OrderStatus'
+        lastUpdate:
+          type: string
+          format: date-time
+    GardenerOrderDtos:
+      type: array
+      items:
+        $ref: '#/components/schemas/GardenerOrderDto'
+    GreenhouseMessageDto:
+      required: ['gardenerId', 'airTemperature', 'airHumidity', 'soilMoisture', 'lightIntensity']
+      properties:
+        gardenerId:
+          type: string
+          format: uuid
         airTemperature:
-          type: number
+          type: integer
         airHumidity:
-          type: number
+          type: integer
         soilMoisture:
-          type: number
-        photoresistance:
-          type: number
+          type: integer
+        lightIntensity:
+          type: integer
+      additionalProperties: false
+    GreenhouseMessageDtos:
+      type: array
+      items:
+        $ref: '#/components/schemas/GreenhouseMessageDto'
     GreenhouseConfigDto:
       properties:
         soilMoisture:
-          type: number
+          type: integer
     UserDto:
       required: ['email', 'password']
       properties:
@@ -640,32 +804,35 @@ components:
           format: uuid
         name:
           type: string
-        airHumidity:
+        airHumidityMin:
           type: integer
-          format: int32
-        airTemperatureSummer:
+        airHumidityMax:
           type: integer
-          format: int32
-        airTemperatureWinter:
+        airTemperatureSummerMin:
           type: integer
-          format: int32
-        lightIntensity:
+        airTemperatureSummerMax:
           type: integer
-          format: int32
-        soilHumiditySummer:
+        airTemperatureWinterMin:
           type: integer
-          format: int32
-        soilHumidityWinter:
+        airTemperatureWinterMax:
           type: integer
-          format: int32
-        soilType:
-          $ref: '#/components/schemas/SoilType'
+        lightIntensityMin:
+          type: integer
+        lightIntensityMax:
+          type: integer
+        soilMoistureSummerMin:
+          type: integer
+        soilMoistureSummerMax:
+          type: integer
+        soilMoistureWinterMin:
+          type: integer
+        soilMoistureWinterMax:
+          type: integer
         userId:
           type: string
           format: uuid
         wateringIntervalDays:
           type: integer
-          format: int32
     GrowingConfigurationDtos:
       type: array
       items:
@@ -744,6 +911,5 @@ components:
       properties:
         code:
           type: integer
-          format: int32
         message:
           type: string

@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
-import javax.persistence.OneToOne
 import javax.persistence.Table
 
 @Entity
@@ -33,7 +32,7 @@ class PlantType (
 
         @ManyToOne(optional = false)
         @JoinColumn(name = "growing_configuration", nullable = false)
-        var growingConfigurations: GrowingConfigurations,
+        var growingConfiguration: GrowingConfiguration,
 
         @Column(name = "app_user")
         var appUserId: UUID?,

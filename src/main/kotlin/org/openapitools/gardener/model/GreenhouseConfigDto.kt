@@ -16,7 +16,7 @@ import javax.validation.constraints.Size
  */
 data class GreenhouseConfigDto(
 
-    @JsonProperty("soilMoisture") val soilMoisture: java.math.BigDecimal? = null
+    @JsonProperty("soilMoisture") val soilMoisture: kotlin.Int? = null
 ) {
 
 }

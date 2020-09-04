@@ -14,7 +14,7 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "growing_configuration")
-class GrowingConfigurations (
+class GrowingConfiguration (
 
         @Id
         @GenericGenerator(name = "idGenerator", strategy = "org.hibernate.id.UUIDGenerator")
@@ -25,33 +25,53 @@ class GrowingConfigurations (
         @Column
         var name: String,
 
-        @Enumerated(EnumType.STRING)
+        /* Soil moisture in percentage 100% = water, 30% = dry soil*/
         @Column
-        var soilType: SoilType?,
+        var soilMoistureSummerMin: Int?,
 
-        /* Soil humidity in percentage 100% = water, 30% = dry soil*/
+        /* Soil moisture in percentage 100% = water, 30% = dry soil*/
         @Column
-        var soilHumiditySummer: Int?,
+        var soilMoistureSummerMax: Int?,
 
-        /* Soil humidity in percentage 100% = water, 30% = dry soil*/
+        /* Soil moisture in percentage 100% = water, 30% = dry soil*/
         @Column
-        var soilHumidityWinter: Int?,
+        var soilMoistureWinterMin: Int?,
+
+        /* Soil moisture in percentage 100% = water, 30% = dry soil*/
+        @Column
+        var soilMoistureWinterMax: Int?,
 
         /* Air humidity in percentage 100% = rain*/
         @Column
-        var airHumidity: Int?,
+        var airHumidityMin: Int?,
+
+        /* Air humidity in percentage 100% = rain*/
+        @Column
+        var airHumidityMax: Int?,
 
         /* Air temperature in Celsius degrees*/
         @Column
-        var airTemperatureSummer: Int?,
+        var airTemperatureSummerMin: Int?,
 
         /* Air temperature in Celsius degrees*/
         @Column
-        var airTemperatureWinter: Int?,
+        var airTemperatureSummerMax: Int?,
+
+        /* Air temperature in Celsius degrees*/
+        @Column
+        var airTemperatureWinterMin: Int?,
+
+        /* Air temperature in Celsius degrees*/
+        @Column
+        var airTemperatureWinterMax: Int?,
 
         /* Light intensity in LUX*/
         @Column
-        var lightIntensity: Int?,
+        var lightIntensityMin: Int?,
+
+        /* Light intensity in LUX*/
+        @Column
+        var lightIntensityMax: Int?,
 
         @Column
         var wateringIntervalDays: Int?,

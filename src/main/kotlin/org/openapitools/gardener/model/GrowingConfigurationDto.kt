@@ -2,7 +2,6 @@ package org.openapitools.gardener.model
 
 import java.util.Objects
 import com.fasterxml.jackson.annotation.JsonProperty
-import org.openapitools.gardener.model.SoilType
 import javax.validation.constraints.DecimalMax
 import javax.validation.constraints.DecimalMin
 import javax.validation.constraints.Max
@@ -15,13 +14,18 @@ import javax.validation.constraints.Size
  * 
  * @param name 
  * @param id 
- * @param airHumidity 
- * @param airTemperatureSummer 
- * @param airTemperatureWinter 
- * @param lightIntensity 
- * @param soilHumiditySummer 
- * @param soilHumidityWinter 
- * @param soilType 
+ * @param airHumidityMin 
+ * @param airHumidityMax 
+ * @param airTemperatureSummerMin 
+ * @param airTemperatureSummerMax 
+ * @param airTemperatureWinterMin 
+ * @param airTemperatureWinterMax 
+ * @param lightIntensityMin 
+ * @param lightIntensityMax 
+ * @param soilMoistureSummerMin 
+ * @param soilMoistureSummerMax 
+ * @param soilMoistureWinterMin 
+ * @param soilMoistureWinterMax 
  * @param userId 
  * @param wateringIntervalDays 
  */
@@ -32,19 +36,29 @@ data class GrowingConfigurationDto(
 
     @JsonProperty("id") val id: java.util.UUID? = null,
 
-    @JsonProperty("airHumidity") val airHumidity: kotlin.Int? = null,
+    @JsonProperty("airHumidityMin") val airHumidityMin: kotlin.Int? = null,
 
-    @JsonProperty("airTemperatureSummer") val airTemperatureSummer: kotlin.Int? = null,
+    @JsonProperty("airHumidityMax") val airHumidityMax: kotlin.Int? = null,
 
-    @JsonProperty("airTemperatureWinter") val airTemperatureWinter: kotlin.Int? = null,
+    @JsonProperty("airTemperatureSummerMin") val airTemperatureSummerMin: kotlin.Int? = null,
 
-    @JsonProperty("lightIntensity") val lightIntensity: kotlin.Int? = null,
+    @JsonProperty("airTemperatureSummerMax") val airTemperatureSummerMax: kotlin.Int? = null,
 
-    @JsonProperty("soilHumiditySummer") val soilHumiditySummer: kotlin.Int? = null,
+    @JsonProperty("airTemperatureWinterMin") val airTemperatureWinterMin: kotlin.Int? = null,
 
-    @JsonProperty("soilHumidityWinter") val soilHumidityWinter: kotlin.Int? = null,
+    @JsonProperty("airTemperatureWinterMax") val airTemperatureWinterMax: kotlin.Int? = null,
 
-    @JsonProperty("soilType") val soilType: SoilType? = null,
+    @JsonProperty("lightIntensityMin") val lightIntensityMin: kotlin.Int? = null,
+
+    @JsonProperty("lightIntensityMax") val lightIntensityMax: kotlin.Int? = null,
+
+    @JsonProperty("soilMoistureSummerMin") val soilMoistureSummerMin: kotlin.Int? = null,
+
+    @JsonProperty("soilMoistureSummerMax") val soilMoistureSummerMax: kotlin.Int? = null,
+
+    @JsonProperty("soilMoistureWinterMin") val soilMoistureWinterMin: kotlin.Int? = null,
+
+    @JsonProperty("soilMoistureWinterMax") val soilMoistureWinterMax: kotlin.Int? = null,
 
     @JsonProperty("userId") val userId: java.util.UUID? = null,
 

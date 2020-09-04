@@ -1,7 +1,6 @@
 package com.iulia.gardener.service.impl
 
-import com.iulia.gardener.entity.FeaturesConfiguration
-import com.iulia.gardener.entity.GrowingConfigurations
+import com.iulia.gardener.entity.GrowingConfiguration
 import com.iulia.gardener.mapper.impl.GrowingConfigurationsMapper
 import org.openapitools.gardener.model.GrowingConfigurationDto
 import com.iulia.gardener.repo.GrowingConfigurationsRepository
@@ -13,7 +12,7 @@ import java.util.*
 class GrowingConfigurationDtoService(
         override var mapper: GrowingConfigurationsMapper,
         override var repository: GrowingConfigurationsRepository) :
-        GenericDtoService<GrowingConfigurations, GrowingConfigurationDto, GrowingConfigurationsMapper, GrowingConfigurationsRepository>() {
+        GenericDtoService<GrowingConfiguration, GrowingConfigurationDto, GrowingConfigurationsMapper, GrowingConfigurationsRepository>() {
 
     override fun getDtoId(dto: GrowingConfigurationDto): UUID? {
         return dto.id
@@ -24,9 +23,9 @@ class GrowingConfigurationDtoService(
     }
 
     fun getUserGrowingConfigurations(appUserUUID: UUID): List<GrowingConfigurationDto> {
-        var growingConfigurations = mutableListOf<GrowingConfigurations>()
-        growingConfigurations.addAll(repository.getAllByAppUserId(null) as Iterable<GrowingConfigurations>)
-        growingConfigurations.addAll(repository.getAllByAppUserId(appUserUUID) as Iterable<GrowingConfigurations>)
+        var growingConfigurations = mutableListOf<GrowingConfiguration>()
+        growingConfigurations.addAll(repository.getAllByAppUserId(null) as Iterable<GrowingConfiguration>)
+        growingConfigurations.addAll(repository.getAllByAppUserId(appUserUUID) as Iterable<GrowingConfiguration>)
         return growingConfigurations!!.map { mapper.toDto(it) }
     }
 }

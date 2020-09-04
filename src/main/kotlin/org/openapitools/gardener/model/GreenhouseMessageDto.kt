@@ -12,23 +12,28 @@ import javax.validation.constraints.Size
 
 /**
  * 
- * @param user 
+ * @param gardenerId 
  * @param airTemperature 
  * @param airHumidity 
  * @param soilMoisture 
- * @param photoresistance 
+ * @param lightIntensity 
  */
-data class GreenhouseStatsDto(
+data class GreenhouseMessageDto(
 
-    @JsonProperty("user") val user: kotlin.String? = null,
+    @get:NotNull 
+    @JsonProperty("gardenerId") val gardenerId: java.util.UUID,
 
-    @JsonProperty("airTemperature") val airTemperature: java.math.BigDecimal? = null,
+    @get:NotNull 
+    @JsonProperty("airTemperature") val airTemperature: kotlin.Int,
 
-    @JsonProperty("airHumidity") val airHumidity: java.math.BigDecimal? = null,
+    @get:NotNull 
+    @JsonProperty("airHumidity") val airHumidity: kotlin.Int,
 
-    @JsonProperty("soilMoisture") val soilMoisture: java.math.BigDecimal? = null,
+    @get:NotNull 
+    @JsonProperty("soilMoisture") val soilMoisture: kotlin.Int,
 
-    @JsonProperty("photoresistance") val photoresistance: java.math.BigDecimal? = null
+    @get:NotNull 
+    @JsonProperty("lightIntensity") val lightIntensity: kotlin.Int
 ) {
 
 }

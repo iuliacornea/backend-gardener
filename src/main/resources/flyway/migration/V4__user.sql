@@ -2,10 +2,10 @@ create table app_user
 (
     id       uuid         not null primary key,
     email    varchar(50) not null unique,
-    password varchar(255) not null,
+    password varchar not null,
     username varchar(50),
-    role     varchar(50) not null,
-    token    varchar(12)
+    role     varchar not null,
+    token    varchar
 );
 
 alter table growing_configuration
