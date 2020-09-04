@@ -61,7 +61,7 @@ interface AuthenticationApi {
 
 
     @RequestMapping(
-            value = ["/users/new"],
+            value = ["/users/signup"],
             produces = ["application/json"], 
             consumes = ["application/json"],
             method = [RequestMethod.POST])

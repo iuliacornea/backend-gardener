@@ -1,32 +1,30 @@
 package com.iulia.gardener.mapper.impl
 
 import com.iulia.gardener.entity.AppUser
-import com.iulia.gardener.entity.UserRole
-import com.iulia.gardener.mapper.GenericMapper
 import org.openapitools.gardener.model.UserDto
 import org.springframework.stereotype.Component
-import org.springframework.stereotype.Controller
 
 @Component
-class UserMapper : GenericMapper<UserDto, AppUser> {
-    override fun toEntity(dto: UserDto): AppUser {
+class UserMapper {
+    fun toEntity(dto: UserDto): AppUser {
         return AppUser(
                 id = dto.id,
                 email = dto.email,
                 username = dto.username,
                 password = dto.password,
                 token = dto.token,
-                role = UserRole.USER
+                role = dto.role
         )
     }
 
-    override fun toDto(entity: AppUser): UserDto {
+    fun toDto(entity: AppUser): UserDto {
         return UserDto(
                 id = entity.id,
                 email = entity.email,
                 username = entity.username,
                 password = entity.password,
-                token = entity.token
+                token = entity.token,
+                role = entity.role
         )
     }
 }

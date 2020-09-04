@@ -133,7 +133,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GreenhouseConfigDto"
-  /users/new:
+  /users/signup:
     post:
       summary: Create a new user with the given credentials.
       operationId: signUpUser
@@ -729,19 +729,21 @@ components:
         soilMoisture:
           type: integer
     UserDto:
-      required: ['email', 'password']
+      required: ['email', 'password', 'username', 'role']
       properties:
         id:
           type: string
           format: uuid
         email:
           type: string
-        username:
-          type: string
         password:
+          type: string
+        username:
           type: string
         token:
           type: string
+        role:
+          $ref: '#/components/schemas/UserRole'
     PlantTypeDto:
       required: ['name', 'featuresConfiguration', 'growingConfiguration']
       properties:
@@ -903,6 +905,9 @@ components:
     OrderStatus:
       type: string
       enum: ['OPEN', 'PENDING_APPROVAL', 'APPROVED']
+    UserRole:
+      type: string
+      enum: ['USER', 'ADMIN']
 
     Error:
       required:

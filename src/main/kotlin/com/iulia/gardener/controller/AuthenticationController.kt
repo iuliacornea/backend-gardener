@@ -1,5 +1,8 @@
 package com.iulia.gardener.controller
 
+import com.iulia.gardener.error.InvalidEmailAddress
+import com.iulia.gardener.error.InvalidPassword
+import com.iulia.gardener.error.UnauthorizedUserRole
 import com.iulia.gardener.service.impl.UserService
 import org.openapitools.gardener.api.AuthenticationApi
 import org.openapitools.gardener.model.UserDto
@@ -12,21 +15,23 @@ import org.springframework.stereotype.Controller
 class AuthenticationController(var userService: UserService) : AuthenticationApi {
 
     override fun signUpUser(userDto: UserDto): ResponseEntity<UserDto> {
-        if (userService.emailUsed(userDto)) {
+        try {
+            var userWithToken = userService.signupUser(userDto)
+            return ResponseEntity(userWithToken, HttpStatus.OK)
+        } catch (e: InvalidEmailAddress) {
             return ResponseEntity(HttpStatus.NOT_ACCEPTABLE)
-        }
-        if (userDto.password.length < 6) {
+        } catch (e: InvalidPassword) {
             return ResponseEntity(HttpStatus.EXPECTATION_FAILED)
+        } catch (e: UnauthorizedUserRole) {
+            return ResponseEntity(HttpStatus.UNAUTHORIZED)
         }
-        var newUserDto = userService.save(userDto)
-        return ResponseEntity(newUserDto, HttpStatus.OK)
     }
 
     override fun loginUser(userDto: UserDto): ResponseEntity<UserDto> {
         try {
             var userWithToken = userService.loginUser(userDto.email, userDto.password)
             return ResponseEntity(userWithToken, HttpStatus.OK)
-        } catch (exception : EmptyResultDataAccessException) {
+        } catch (exception: EmptyResultDataAccessException) {
             return ResponseEntity(HttpStatus.UNAUTHORIZED)
         }
     }
@@ -34,7 +39,7 @@ class AuthenticationController(var userService: UserService) : AuthenticationApi
     override fun logoutUser(userToken: String): ResponseEntity<Unit> {
         try {
             userService.logoutUser(userToken)
-        } catch (exception : EmptyResultDataAccessException) {
+        } catch (exception: EmptyResultDataAccessException) {
             return ResponseEntity(HttpStatus.NOT_FOUND)
         }
         return ResponseEntity(HttpStatus.OK)
