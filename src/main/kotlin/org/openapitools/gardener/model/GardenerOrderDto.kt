@@ -17,9 +17,9 @@ import javax.validation.constraints.Size
  * @param userId 
  * @param wifiNetwork 
  * @param wifiPassword 
+ * @param id 
  * @param createdAt 
  * @param status 
- * @param id 
  * @param lastUpdate 
  */
 data class GardenerOrderDto(
@@ -36,13 +36,11 @@ data class GardenerOrderDto(
     @get:NotNull 
     @JsonProperty("wifiPassword") val wifiPassword: kotlin.String,
 
-    @get:NotNull 
-    @JsonProperty("createdAt") val createdAt: java.time.OffsetDateTime,
-
-    @get:NotNull 
-    @JsonProperty("status") val status: OrderStatus,
-
     @JsonProperty("id") val id: java.util.UUID? = null,
+
+    @JsonProperty("createdAt") val createdAt: java.time.OffsetDateTime? = null,
+
+    @JsonProperty("status") val status: OrderStatus? = null,
 
     @JsonProperty("lastUpdate") val lastUpdate: java.time.OffsetDateTime? = null
 ) {

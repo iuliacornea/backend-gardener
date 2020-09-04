@@ -45,7 +45,6 @@ interface OrdersApi {
             produces = ["application/json"], 
             method = [RequestMethod.GET])
     fun getOrders(@NotNull  @RequestParam(value = "userToken", required = true) userToken: kotlin.String
-, @RequestParam(value = "userId", required = false) userId: java.util.UUID?
 , @RequestParam(value = "status", required = false) status: kotlin.collections.List<OrderStatus>?
 ): ResponseEntity<List<GardenerOrderDto>> {
         return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)

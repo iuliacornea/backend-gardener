@@ -44,7 +44,6 @@ interface GardenersApi {
             produces = ["application/json"], 
             method = [RequestMethod.GET])
     fun getGardeners(@NotNull  @RequestParam(value = "userToken", required = true) userToken: kotlin.String
-, @RequestParam(value = "userId", required = false) userId: java.util.UUID?
 ): ResponseEntity<List<GardenerDto>> {
         return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
     }

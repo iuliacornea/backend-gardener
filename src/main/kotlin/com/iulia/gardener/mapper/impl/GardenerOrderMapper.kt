@@ -12,11 +12,11 @@ class GardenerOrderMapper: GenericMapper<GardenerOrderDto, GardenerOrder> {
     override fun toEntity(dto: GardenerOrderDto): GardenerOrder {
         return GardenerOrder(
                 id = dto.id,
-                createdAt = Timestamp.from(dto.createdAt.toInstant()),
+                createdAt = Timestamp.from(dto.createdAt!!.toInstant()),
                 appUserId = dto.userId,
                 gardenerName = dto.gardenerName,
                 lastUpdate = Timestamp.from(dto.lastUpdate?.toInstant()),
-                status = dto.status,
+                status = dto.status!!,
                 wifiNetwork = dto.wifiNetwork,
                 wifiPassword = dto.wifiPassword
         )

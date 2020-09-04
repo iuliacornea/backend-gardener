@@ -21,7 +21,7 @@ class GardenerMapper(
                 name = entity.name,
                 wifiNetwork = entity.wifiNetwork,
                 wifiPassword = entity.wifiPassword,
-                order = gardenerOrderMapper.toDto(entity.order!!)
+                order = gardenerOrderMapper.toDto(entity.order)
         )
     }
 

@@ -53,13 +53,6 @@ paths:
             type: string
           description: The token of the user making the request
         - in: query
-          name: userId
-          required: false
-          schema:
-            type: string
-            format: uuid
-          description: Filter orders by this user
-        - in: query
           name: status
           required: false
           schema:
@@ -93,13 +86,6 @@ paths:
           schema:
             type: string
           description: The token of the user making the request
-        - in: query
-          name: userId
-          required: false
-          schema:
-            type: string
-            format: uuid
-          description: Filter gardeners by this user
       responses:
         '200':
           description: Gardeners
@@ -679,7 +665,7 @@ components:
       items:
         $ref: '#/components/schemas/GardenerDto'
     GardenerOrderDto:
-      required: ['gardenerName', 'userId', 'wifiNetwork', 'wifiPassword', 'createdAt', 'status']
+      required: ['gardenerName', 'userId', 'wifiNetwork', 'wifiPassword']
       properties:
         id:
           type: string
@@ -904,7 +890,7 @@ components:
       enum: ['SPRING', 'SUMMER', 'AUTUMN', 'WINTER']
     OrderStatus:
       type: string
-      enum: ['OPEN', 'PENDING_APPROVAL', 'APPROVED']
+      enum: ['PENDING_APPROVAL', 'APPROVED', 'MODIFIED_PENDING_APPROVAL', 'CANCELLED', 'COMPLETED']
     UserRole:
       type: string
       enum: ['USER', 'ADMIN']
