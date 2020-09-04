@@ -6,5 +6,13 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface GreenhouseStatsRepository: JpaRepository<GreenhouseStats, UUID> {
+interface GreenhouseStatsRepository : JpaRepository<GreenhouseStats, UUID> {
+
+    fun findAllByGardenerId(gardenerId: UUID): List<GreenhouseStats>
+
+    fun findAllBySpecimenId(specimenId: UUID): List<GreenhouseStats>
+
+    fun findAllByGardenerIdAndSpecimenId(gardenerId: UUID, specimenId: UUID): List<GreenhouseStats>
+
+    fun findAllByUserId(userId: UUID): List<GreenhouseStats>
 }

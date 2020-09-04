@@ -18,6 +18,9 @@ class GreenhouseStats(
         @Column
         var id: UUID? = null,
 
+        @Column(name = "app_user")
+        var userId: UUID,
+
         @Column(name = "gardener")
         var gardenerId: UUID,
 
@@ -38,7 +41,7 @@ class GreenhouseStats(
 
         /* air humidity in percentages where 100%=rain */
         @Column
-        var airHumidityPercentafe: Int,
+        var airHumidityPercentage: Int,
 
         /* raw value is between 0 to 1023 */
         @Column

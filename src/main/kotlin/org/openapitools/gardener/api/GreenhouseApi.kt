@@ -45,7 +45,7 @@ interface GreenhouseApi {
             produces = ["application/json"], 
             method = [RequestMethod.GET])
     fun getStats(@NotNull  @RequestParam(value = "userToken", required = true) userToken: kotlin.String
-, @RequestParam(value = "garednerId", required = false) garednerId: java.util.UUID?
+, @RequestParam(value = "gardenerId", required = false) gardenerId: java.util.UUID?
 , @RequestParam(value = "specimenId", required = false) specimenId: java.util.UUID?
 ): ResponseEntity<List<GreenhouseStatsDto>> {
         return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)

@@ -12,6 +12,7 @@ import javax.validation.constraints.Size
 
 /**
  * 
+ * @param userId 
  * @param gardenerId 
  * @param airTemperature 
  * @param airHumidity 
@@ -19,6 +20,9 @@ import javax.validation.constraints.Size
  * @param lightIntensity 
  */
 data class GreenhouseMessageDto(
+
+    @get:NotNull 
+    @JsonProperty("userId") val userId: java.util.UUID,
 
     @get:NotNull 
     @JsonProperty("gardenerId") val gardenerId: java.util.UUID,

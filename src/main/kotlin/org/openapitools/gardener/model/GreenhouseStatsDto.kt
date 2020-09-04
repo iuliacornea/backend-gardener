@@ -13,6 +13,7 @@ import javax.validation.constraints.Size
 /**
  * 
  * @param id 
+ * @param userId 
  * @param gardenerId 
  * @param specimenId 
  * @param airTemperatureRaw 
@@ -31,10 +32,12 @@ data class GreenhouseStatsDto(
     @JsonProperty("id") val id: java.util.UUID,
 
     @get:NotNull 
-    @JsonProperty("gardenerId") val gardenerId: java.util.UUID,
+    @JsonProperty("userId") val userId: java.util.UUID,
 
     @get:NotNull 
-    @JsonProperty("specimenId") val specimenId: java.util.UUID,
+    @JsonProperty("gardenerId") val gardenerId: java.util.UUID,
+
+    @JsonProperty("specimenId") val specimenId: java.util.UUID? = null,
 
     @JsonProperty("airTemperatureRaw") val airTemperatureRaw: kotlin.Int? = null,
 

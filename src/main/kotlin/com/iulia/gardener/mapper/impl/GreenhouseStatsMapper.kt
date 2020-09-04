@@ -3,26 +3,47 @@ package com.iulia.gardener.mapper.impl
 import com.iulia.gardener.entity.GreenhouseStats
 import com.iulia.gardener.repo.SpecimenRepository
 import org.openapitools.gardener.model.GreenhouseMessageDto
+import org.openapitools.gardener.model.GreenhouseStatsDto
 import org.springframework.stereotype.Component
 import java.sql.Timestamp
 import java.time.Instant
+import java.time.OffsetDateTime
 
 @Component
 class GreenhouseStatsMapper (private var specimenRepository: SpecimenRepository){
 
     fun toEntityFromMessage(greenhouseMessage: GreenhouseMessageDto): GreenhouseStats {
         return GreenhouseStats(
+                userId = greenhouseMessage.userId,
+                gardenerId = greenhouseMessage.gardenerId,
+                specimenId = specimenRepository.findByGardenerId(greenhouseMessage.gardenerId)?.id,
+                receivedAt = Timestamp.from(Instant.now()),
                 airHumidityRaw = greenhouseMessage.airHumidity,
-                airHumidityPercentafe = greenhouseMessage.airHumidity,
+                airHumidityPercentage = greenhouseMessage.airHumidity,
                 airTemperatureRaw = greenhouseMessage.airTemperature,
                 airTemperatureCelsius = greenhouseMessage.airTemperature,
                 lightIntensityRaw = greenhouseMessage.lightIntensity,
                 lightIntensityLux = getLuxFromRawLightIntensity(greenhouseMessage.lightIntensity),
                 soilMoistureRaw = greenhouseMessage.soilMoisture,
-                soilMoisturePercentage = getPercentageFromRawSoilMoisture(greenhouseMessage.soilMoisture),
-                gardenerId = greenhouseMessage.gardenerId,
-                receivedAt = Timestamp.from(Instant.now()),
-                specimenId = specimenRepository.findByGardenerId(greenhouseMessage.gardenerId)?.id
+                soilMoisturePercentage = getPercentageFromRawSoilMoisture(greenhouseMessage.soilMoisture)
+        )
+    }
+
+    fun toDto(entity: GreenhouseStats): GreenhouseStatsDto {
+        return GreenhouseStatsDto(
+                id = entity.id!!,
+                gardenerId = entity.gardenerId,
+                specimenId = entity.specimenId,
+                receivedAt = OffsetDateTime.ofInstant(entity.receivedAt.toInstant(), null) ,
+                soilMoistureRaw = entity.soilMoistureRaw,
+                soilMoisturePercentage = entity.soilMoisturePercentage,
+                lightIntensityLux = entity.lightIntensityLux,
+                lightIntensityRaw = entity.lightIntensityRaw,
+                airTemperatureCelsius = entity.airTemperatureCelsius,
+                airTemperatureRaw = entity.airTemperatureRaw,
+                airHumidityRaw = entity.airHumidityRaw,
+                airHumidityPercentage = entity.airHumidityPercentage,
+                userId = entity.userId
         )
     }
 

@@ -132,7 +132,7 @@ paths:
             type: string
           description: The token of the user who makes the request
         - in: query
-          name: garednerId
+          name: gardenerId
           required: false
           schema:
             type: string
@@ -725,8 +725,11 @@ components:
       items:
         $ref: '#/components/schemas/GardenerOrderDto'
     GreenhouseMessageDto:
-      required: ['gardenerId', 'airTemperature', 'airHumidity', 'soilMoisture', 'lightIntensity']
+      required: ['userId', 'gardenerId', 'airTemperature', 'airHumidity', 'soilMoisture', 'lightIntensity']
       properties:
+        userId:
+          type: string
+          format: uuid
         gardenerId:
           type: string
           format: uuid
@@ -744,9 +747,12 @@ components:
         soilMoisture:
           type: integer
     GreenhouseStatsDto:
-      required: ['id', 'gardenerId', 'specimenId', 'airTemperature', 'airHumidity', 'soilMoisture', 'lightIntensity']
+      required: ['id', 'userId', 'gardenerId']
       properties:
         id:
+          type: string
+          format: uuid
+        userId:
           type: string
           format: uuid
         gardenerId:

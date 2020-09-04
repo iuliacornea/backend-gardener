@@ -8,6 +8,7 @@ import org.openapitools.gardener.model.GardenerOrderDto
 import org.openapitools.gardener.model.UserDto
 import org.openapitools.gardener.model.UserRole
 import org.springframework.stereotype.Component
+import java.util.*
 
 @Component
 class GardenerDtoService(private var mapper: GardenerMapper, private var repository: GardenerRepository) {
@@ -18,10 +19,14 @@ class GardenerDtoService(private var mapper: GardenerMapper, private var reposit
     }
 
     fun getGardeners(requester: UserDto): List<GardenerDto> {
-        if(requester.role == UserRole.ADMIN) {
+        if (requester.role == UserRole.ADMIN) {
             return repository.findAll().map { mapper.toDto(it) }
         }
         return repository.findAllByAppUserId(requester.id!!).map { mapper.toDto(it) }
+    }
+
+    fun getGardener(gardenerId: UUID): GardenerDto {
+        return mapper.toDto(repository.getOne(gardenerId))
     }
 
 }
