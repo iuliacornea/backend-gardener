@@ -7,4 +7,6 @@ import java.util.*
 
 @Repository
 interface GardenerRepository: JpaRepository<Gardener, UUID> {
+
+    fun findAllByAppUserId(appUserId: UUID): List<Gardener>
 }

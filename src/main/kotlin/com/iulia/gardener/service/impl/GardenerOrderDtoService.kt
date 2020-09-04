@@ -12,7 +12,10 @@ import org.openapitools.gardener.model.UserRole
 import java.sql.Timestamp
 import java.time.Instant
 
-class GardenerOrderDtoService(private var repository: GardenerOrderRepository, private var mapper: GardenerOrderMapper) {
+class GardenerOrderDtoService(
+        private var repository: GardenerOrderRepository,
+        private var mapper: GardenerOrderMapper,
+        private var gardenerDtoService: GardenerDtoService) {
 
     fun getOrders(requester: UserDto, statuses: List<OrderStatus>?): List<GardenerOrderDto> {
         if (requester.role == UserRole.ADMIN) {
@@ -41,7 +44,9 @@ class GardenerOrderDtoService(private var repository: GardenerOrderRepository, p
         newEntity.createdAt = Timestamp.from(Instant.now())
         newEntity.status = OrderStatus.PENDING_APPROVAL
         newEntity.lastUpdate = Timestamp.from(Instant.now())
-        return save(newEntity)
+        var savedOrderDto = save(newEntity)
+        gardenerDtoService.createFromOrder(savedOrderDto)
+        return savedOrderDto
     }
 
     private fun validateForCreation(orderDto: GardenerOrderDto) {
