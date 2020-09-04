@@ -7,6 +7,7 @@ package org.openapitools.gardener.api
 
 import org.openapitools.gardener.model.GreenhouseConfigDto
 import org.openapitools.gardener.model.GreenhouseMessageDto
+import org.openapitools.gardener.model.GreenhouseStatsDto
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -37,6 +38,18 @@ import kotlin.collections.Map
 @Validated
 @RequestMapping("\${api.base-path:/v1}")
 interface GreenhouseApi {
+
+
+    @RequestMapping(
+            value = ["/greenhouse/stats"],
+            produces = ["application/json"], 
+            method = [RequestMethod.GET])
+    fun getStats(@NotNull  @RequestParam(value = "userToken", required = true) userToken: kotlin.String
+, @RequestParam(value = "garednerId", required = false) garednerId: java.util.UUID?
+, @RequestParam(value = "specimenId", required = false) specimenId: java.util.UUID?
+): ResponseEntity<List<GreenhouseStatsDto>> {
+        return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
+    }
 
 
     @RequestMapping(

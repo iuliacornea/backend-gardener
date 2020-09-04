@@ -101,7 +101,7 @@ paths:
                 $ref: "#/components/schemas/Error"
   /greenhouse/stats:
     post:
-      summary: The statistics from a plant monitoring device
+      summary: The statistics registered by a gardener
       operationId: postStats
       tags:
         - greenhouse
@@ -114,11 +114,44 @@ paths:
               $ref: '#/components/schemas/GreenhouseMessageDto'
       responses:
         '200':
-          description: All plants of the application
+          description: The configuration for the gardener to apply to the current greenhouse
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/GreenhouseConfigDto"
+    get:
+      summary: The statistics registered by for the given gardener/specimen
+      operationId: getStats
+      tags:
+        - greenhouse
+      parameters:
+        - in: query
+          name: userToken
+          required: true
+          schema:
+            type: string
+          description: The token of the user who makes the request
+        - in: query
+          name: garednerId
+          required: false
+          schema:
+            type: string
+            format: uuid
+          description: Filters the results by the given gardenerId
+        - in: query
+          name: specimenId
+          required: false
+          schema:
+            type: string
+            format: uuid
+          description: Filters the results by the given specimenId
+      responses:
+        '200':
+          description: List of stats for the given params
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GreenhouseStatsDtos"
   /users/signup:
     post:
       summary: Create a new user with the given credentials.
@@ -706,14 +739,45 @@ components:
         lightIntensity:
           type: integer
       additionalProperties: false
-    GreenhouseMessageDtos:
-      type: array
-      items:
-        $ref: '#/components/schemas/GreenhouseMessageDto'
     GreenhouseConfigDto:
       properties:
         soilMoisture:
           type: integer
+    GreenhouseStatsDto:
+      required: ['id', 'gardenerId', 'specimenId', 'airTemperature', 'airHumidity', 'soilMoisture', 'lightIntensity']
+      properties:
+        id:
+          type: string
+          format: uuid
+        gardenerId:
+          type: string
+          format: uuid
+        specimenId:
+          type: string
+          format: uuid
+        airTemperatureRaw:
+          type: integer
+        airHumidityRaw:
+          type: integer
+        soilMoistureRaw:
+          type: integer
+        lightIntensityRaw:
+          type: integer
+        airTemperatureCelsius:
+          type: integer
+        airHumidityPercentage:
+          type: integer
+        soilMoisturePercentage:
+          type: integer
+        lightIntensityLux:
+          type: integer
+        receivedAt:
+          type: string
+          format: date-time
+    GreenhouseStatsDtos:
+      type: array
+      items:
+        $ref: '#/components/schemas/GreenhouseStatsDto'
     UserDto:
       required: ['email', 'password', 'username', 'role']
       properties:

@@ -22,7 +22,7 @@ class GreenhouseStatsMapper (private var specimenRepository: SpecimenRepository)
                 soilMoisturePercentage = getPercentageFromRawSoilMoisture(greenhouseMessage.soilMoisture),
                 gardenerId = greenhouseMessage.gardenerId,
                 receivedAt = Timestamp.from(Instant.now()),
-                specimen = specimenRepository.findByGardenerId(greenhouseMessage.gardenerId)?.id
+                specimenId = specimenRepository.findByGardenerId(greenhouseMessage.gardenerId)?.id
         )
     }
 

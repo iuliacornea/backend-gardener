@@ -21,8 +21,8 @@ class GreenhouseStats(
         @Column(name = "gardener")
         var gardenerId: UUID,
 
-        @Column
-        var specimen: UUID?,
+        @Column(name = "specimen")
+        var specimenId: UUID?,
 
         /* raw value */
         @Column
