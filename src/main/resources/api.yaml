@@ -627,43 +627,45 @@ components:
           $ref: '#/components/schemas/FlowerShape'
         flowerPetals:
           $ref: '#/components/schemas/FlowerPetals'
-        userId:
-          type: string
-          format: uuid
     FeaturesConfigurationDtos:
       type: array
       items:
         $ref: '#/components/schemas/FeaturesConfigurationDto'
     GrowingConfigurationDto:
       type: object
+      required: ['name']
       properties:
         id:
           type: string
           format: uuid
-        soilType:
-          $ref: '#/components/schemas/SoilType'
-        soilQuantity:
+        name:
+          type: string
+        airHumidity:
           type: integer
           format: int32
-        soilHumiditySummer:
-          $ref: '#/components/schemas/FiveDegreeScale'
-        soilHumidityWinter:
-          $ref: '#/components/schemas/FiveDegreeScale'
-        airHumidity:
-          $ref: '#/components/schemas/FiveDegreeScale'
         airTemperatureSummer:
           type: integer
           format: int32
         airTemperatureWinter:
           type: integer
           format: int32
-        lightIntensitySummer:
-          $ref: '#/components/schemas/FiveDegreeScale'
-        lightIntensityWinter:
-          $ref: '#/components/schemas/FiveDegreeScale'
+        lightIntensity:
+          type: integer
+          format: int32
+        soilHumiditySummer:
+          type: integer
+          format: int32
+        soilHumidityWinter:
+          type: integer
+          format: int32
+        soilType:
+          $ref: '#/components/schemas/SoilType'
         userId:
           type: string
           format: uuid
+        wateringIntervalDays:
+          type: integer
+          format: int32
     GrowingConfigurationDtos:
       type: array
       items:
@@ -685,6 +687,9 @@ components:
         userId:
           type: string
           format: uuid
+        createdAt:
+          type: string
+          format: date-time
     SpecimenDtos:
       type: array
       items:
@@ -728,6 +733,9 @@ components:
     Season:
       type: string
       enum: ['SPRING', 'SUMMER', 'AUTUMN', 'WINTER']
+    OrderStatus:
+      type: string
+      enum: ['OPEN', 'PENDING_APPROVAL', 'APPROVED']
 
     Error:
       required:

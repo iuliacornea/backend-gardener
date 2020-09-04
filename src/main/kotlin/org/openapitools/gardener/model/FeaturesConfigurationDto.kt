@@ -33,7 +33,6 @@ import javax.validation.constraints.Size
  * @param flowerExistance 
  * @param flowerShape 
  * @param flowerPetals 
- * @param userId 
  */
 data class FeaturesConfigurationDto(
 
@@ -57,9 +56,7 @@ data class FeaturesConfigurationDto(
 
     @JsonProperty("flowerShape") val flowerShape: FlowerShape? = null,
 
-    @JsonProperty("flowerPetals") val flowerPetals: FlowerPetals? = null,
-
-    @JsonProperty("userId") val userId: java.util.UUID? = null
+    @JsonProperty("flowerPetals") val flowerPetals: FlowerPetals? = null
 ) {
 
 }

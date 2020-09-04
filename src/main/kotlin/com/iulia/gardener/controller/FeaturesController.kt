@@ -19,19 +19,21 @@ class FeaturesController(var service: FeaturesConfigurationDtoService,
                          var userService: UserService) : FeaturesApi {
 
     override fun deleteFeatureConfiguration(@PathVariable(value = "id") id: UUID, @NotNull @RequestParam(required = true, value = "userToken") userToken: String): ResponseEntity<Unit> {
-        var resource = service.getOne(id)
-        if (resource?.userId == null && userService.isAdmin(userToken)) {
-            service.delete(id)
-            return ResponseEntity(HttpStatus.OK)
-        } else if (resource?.userId != null) {
-            var requester = userService.getUserByToken(userToken).id
-            var owner = resource.userId
-            if (requester == owner) {
-                service.delete(id)
-                return ResponseEntity(HttpStatus.OK)
-            }
-        }
-        return ResponseEntity(HttpStatus.UNAUTHORIZED)
+//        var resource = service.getOne(id)
+//        if (resource?.userId == null && userService.isAdmin(userToken)) {
+//            service.delete(id)
+//            return ResponseEntity(HttpStatus.OK)
+//        } else if (resource?.userId != null) {
+//            var requester = userService.getUserByToken(userToken).id
+//            var owner = resource.userId
+//            if (requester == owner) {
+//                service.delete(id)
+//                return ResponseEntity(HttpStatus.OK)
+//            }
+//        }
+//        return ResponseEntity(HttpStatus.UNAUTHORIZED)
+        service.delete(id)
+        return ResponseEntity(HttpStatus.OK)
     }
 
     override fun getFeatureConfiguration(id: UUID): ResponseEntity<FeaturesConfigurationDto> {

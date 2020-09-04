@@ -22,39 +22,41 @@ class GrowingConfigurations (
         @Column
         var id: UUID? = null,
 
+        @Column
+        var name: String,
+
         @Enumerated(EnumType.STRING)
         @Column
         var soilType: SoilType?,
 
+        /* Soil humidity in percentage 100% = water, 30% = dry soil*/
         @Column
-        var soilQuantity: Int?,
+        var soilHumiditySummer: Int?,
 
-        @Enumerated(EnumType.STRING)
+        /* Soil humidity in percentage 100% = water, 30% = dry soil*/
         @Column
-        var soilHumiditySummer: FiveDegreeScale?,
+        var soilHumidityWinter: Int?,
 
-        @Enumerated(EnumType.STRING)
+        /* Air humidity in percentage 100% = rain*/
         @Column
-        var soilHumidityWinter: FiveDegreeScale?,
+        var airHumidity: Int?,
 
-        @Enumerated(EnumType.STRING)
-        @Column
-        var airHumidity: FiveDegreeScale?,
-
+        /* Air temperature in Celsius degrees*/
         @Column
         var airTemperatureSummer: Int?,
 
+        /* Air temperature in Celsius degrees*/
         @Column
         var airTemperatureWinter: Int?,
 
-        @Enumerated(EnumType.STRING)
+        /* Light intensity in LUX*/
         @Column
-        var lightIntensitySummer: FiveDegreeScale?,
+        var lightIntensity: Int?,
 
-        @Enumerated(EnumType.STRING)
         @Column
-        var lightIntensityWinter: FiveDegreeScale?,
+        var wateringIntervalDays: Int?,
 
+        /* User who created this config or null in case it's a global config created by an admin*/
         @Column(name = "app_user")
         var appUserId: UUID?
 ): UuidEntity {

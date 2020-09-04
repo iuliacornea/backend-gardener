@@ -13,14 +13,13 @@ class GrowingConfigurationsMapper: GenericMapper<GrowingConfigurationDto, Growin
                 airHumidity = dto.airHumidity,
                 airTemperatureSummer = dto.airTemperatureSummer,
                 airTemperatureWinter = dto.airTemperatureWinter,
-                lightIntensitySummer = dto.lightIntensitySummer,
-                lightIntensityWinter = dto.lightIntensityWinter,
+                lightIntensity = dto.lightIntensity,
                 soilHumiditySummer = dto.soilHumiditySummer,
                 soilHumidityWinter = dto.soilHumidityWinter,
-                soilQuantity = dto.soilQuantity,
                 soilType = dto.soilType,
-                appUserId = dto.userId
-
+                appUserId = dto.userId,
+                name = dto.name,
+                wateringIntervalDays = dto.wateringIntervalDays
         )
     }
 
@@ -30,14 +29,13 @@ class GrowingConfigurationsMapper: GenericMapper<GrowingConfigurationDto, Growin
                 airHumidity = entity.airHumidity,
                 airTemperatureSummer = entity.airTemperatureSummer,
                 airTemperatureWinter = entity.airTemperatureWinter,
-                lightIntensitySummer = entity.lightIntensitySummer,
-                lightIntensityWinter = entity.lightIntensityWinter,
+                lightIntensity = entity.lightIntensity,
                 soilHumiditySummer = entity.soilHumiditySummer,
                 soilHumidityWinter = entity.soilHumidityWinter,
-                soilQuantity = entity.soilQuantity,
                 soilType = entity.soilType,
-                userId = entity.appUserId
-
+                userId = entity.appUserId,
+                name = entity.name,
+                wateringIntervalDays = entity.wateringIntervalDays
         )
     }
 

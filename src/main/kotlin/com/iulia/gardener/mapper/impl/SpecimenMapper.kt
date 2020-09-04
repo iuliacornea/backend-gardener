@@ -8,6 +8,7 @@ import org.openapitools.gardener.model.GrowingConfigurationDto
 import org.openapitools.gardener.model.PlantTypeDto
 import org.openapitools.gardener.model.SpecimenDto
 import org.springframework.stereotype.Component
+import java.sql.Timestamp
 
 @Component
 class SpecimenMapper(
@@ -30,7 +31,9 @@ class SpecimenMapper(
                 appUserId =  dto.userId,
                 growingConfigurations = growingConfigurations,
                 plantType = plantType,
-                season = dto.season
+                season = dto.season,
+                createdAt = Timestamp.from(dto.createdAt?.toInstant()),
+                gardenerEntity = null
         )
     }
 

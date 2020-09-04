@@ -20,14 +20,11 @@ class FeaturesConfigurationDtoService(
     }
 
     fun getGlobalFeatureConfigurations(): List<FeaturesConfigurationDto> {
-        return repository.getAllByAppUserId(null)!!.map { mapper.toDto(it) }
+        return repository.findAll()!!.map { mapper.toDto(it) }
     }
 
     fun getUserFeatureConfigurations(appUserUUID: UUID): List<FeaturesConfigurationDto> {
-        var featureConfigurations = mutableListOf<FeaturesConfiguration>()
-        featureConfigurations.addAll(repository.getAllByAppUserId(null) as Iterable<FeaturesConfiguration>)
-        featureConfigurations.addAll(repository.getAllByAppUserId(appUserUUID) as Iterable<FeaturesConfiguration>)
-        return featureConfigurations!!.map { mapper.toDto(it) }
+        return repository.findAll()!!.map { mapper.toDto(it) }
     }
 
 }

@@ -5,13 +5,16 @@ import java.sql.Timestamp
 import java.util.*
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.EnumType
+import javax.persistence.Enumerated
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.Table
 
 @Entity
-@Table(name = "greenhouse_stats")
-class GreenhouseStats(
+@Table(name = "pot_gardener")
+class GardenerEntity (
+
         @Id
         @GenericGenerator(name = "idGenerator", strategy = "org.hibernate.id.UUIDGenerator")
         @GeneratedValue(generator = "idGenerator")
@@ -19,29 +22,20 @@ class GreenhouseStats(
         var id: UUID? = null,
 
         @Column
-        var gardener: UUID,
+        var name: String,
+
+        @Column(name = "app_user")
+        var appUserId: UUID,
 
         @Column
-        var specimen: UUID,
+        var wifiNetwork: String,
 
         @Column
-        var airTemperatureRaw: Int,
+        var wifiPass: String,
 
         @Column
-        var airHumidityRaw: Int,
+        var createdAt: Timestamp,
 
         @Column
-        var soilMoidtureRaw: Int,
-
-        @Column
-        var soilMoidturePercentage: Int,
-
-        @Column
-        var photoresistanceRaw: Int,
-
-        @Column
-        var photoresistanceLux: Int,
-
-        @Column
-        var receivedAt: Timestamp
+        var orderId: UUID
 )

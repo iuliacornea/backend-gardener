@@ -21,6 +21,7 @@ import javax.validation.constraints.Size
  * @param plantType 
  * @param growingConfiguration 
  * @param season 
+ * @param createdAt 
  */
 data class SpecimenDto(
 
@@ -36,7 +37,9 @@ data class SpecimenDto(
 
     @JsonProperty("growingConfiguration") val growingConfiguration: GrowingConfigurationDto? = null,
 
-    @JsonProperty("season") val season: Season? = null
+    @JsonProperty("season") val season: Season? = null,
+
+    @JsonProperty("createdAt") val createdAt: java.time.OffsetDateTime? = null
 ) {
 
 }

@@ -1,47 +1,46 @@
 package com.iulia.gardener.entity
 
 import org.hibernate.annotations.GenericGenerator
+import org.openapitools.gardener.model.OrderStatus
 import java.sql.Timestamp
 import java.util.*
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.EnumType
+import javax.persistence.Enumerated
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.Table
 
 @Entity
-@Table(name = "greenhouse_stats")
-class GreenhouseStats(
+@Table(name = "gardener_order")
+class GardenerOrderEntity (
+
         @Id
         @GenericGenerator(name = "idGenerator", strategy = "org.hibernate.id.UUIDGenerator")
         @GeneratedValue(generator = "idGenerator")
         @Column
         var id: UUID? = null,
 
-        @Column
-        var gardener: UUID,
+        @Column(name = "app_user")
+        var appUserId: UUID,
 
         @Column
-        var specimen: UUID,
+        var gardenerName: String,
 
         @Column
-        var airTemperatureRaw: Int,
+        var wifiNetwork: String,
 
         @Column
-        var airHumidityRaw: Int,
+        var wifiPass: String,
+
+        @Enumerated(EnumType.STRING)
+        @Column
+        var status: OrderStatus,
 
         @Column
-        var soilMoidtureRaw: Int,
+        var createdAt: Timestamp,
 
         @Column
-        var soilMoidturePercentage: Int,
-
-        @Column
-        var photoresistanceRaw: Int,
-
-        @Column
-        var photoresistanceLux: Int,
-
-        @Column
-        var receivedAt: Timestamp
+        var lastUpdate: Timestamp?
 )
