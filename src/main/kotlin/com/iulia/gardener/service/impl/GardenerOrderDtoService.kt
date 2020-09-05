@@ -9,9 +9,13 @@ import org.openapitools.gardener.model.GardenerOrderDto
 import org.openapitools.gardener.model.OrderStatus
 import org.openapitools.gardener.model.UserDto
 import org.openapitools.gardener.model.UserRole
+import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 import java.sql.Timestamp
 import java.time.Instant
+import java.time.OffsetDateTime
 
+@Service
 class GardenerOrderDtoService(
         private var repository: GardenerOrderRepository,
         private var mapper: GardenerOrderMapper,
@@ -44,9 +48,7 @@ class GardenerOrderDtoService(
         newEntity.createdAt = Timestamp.from(Instant.now())
         newEntity.status = OrderStatus.PENDING_APPROVAL
         newEntity.lastUpdate = Timestamp.from(Instant.now())
-        var savedOrderDto = save(newEntity)
-        gardenerDtoService.createFromOrder(savedOrderDto)
-        return savedOrderDto
+        return save(newEntity)
     }
 
     private fun validateForCreation(orderDto: GardenerOrderDto) {
@@ -56,17 +58,27 @@ class GardenerOrderDtoService(
         if (orderDto.createdAt != null) {
             throw InvalidOrderCreate("Can not create an order with a given creation date")
         }
-        if (orderDto.status != null || orderDto.status != OrderStatus.PENDING_APPROVAL) {
+        if (orderDto.status != null && orderDto.status != OrderStatus.PENDING_APPROVAL) {
             throw InvalidOrderCreate("Can not create an order with status ${orderDto.status}")
         }
     }
 
     private fun updateOrder(orderDto: GardenerOrderDto, requester: UserDto): GardenerOrderDto {
+        var createGardener = shouldCreateGardener(orderDto)
         validateForUpdate(orderDto, requester)
         var entity = mapper.toEntity(orderDto)
         entity.lastUpdate = Timestamp.from(Instant.now())
-        // TODO generate a new gardener
-        return save(entity)
+        var updatedOrder = save(entity)
+        if(createGardener) {
+            gardenerDtoService.createFromOrder(updatedOrder)
+        }
+        return updatedOrder
+    }
+
+    private fun shouldCreateGardener(orderDto: GardenerOrderDto): Boolean {
+        return orderDto.status == OrderStatus.COMPLETED
+                && orderDto.id != null
+                && repository.getOne(orderDto.id).status != OrderStatus.COMPLETED;
     }
 
     private fun validateForUpdate(orderDto: GardenerOrderDto, requester: UserDto) {

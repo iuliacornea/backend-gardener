@@ -15,10 +15,10 @@ import javax.validation.constraints.Size
  * 
  * @param email 
  * @param password 
- * @param username 
- * @param role 
  * @param id 
+ * @param username 
  * @param token 
+ * @param role 
  */
 data class UserDto(
 
@@ -28,15 +28,13 @@ data class UserDto(
     @get:NotNull 
     @JsonProperty("password") val password: kotlin.String,
 
-    @get:NotNull 
-    @JsonProperty("username") val username: kotlin.String,
-
-    @get:NotNull 
-    @JsonProperty("role") val role: UserRole,
-
     @JsonProperty("id") val id: java.util.UUID? = null,
 
-    @JsonProperty("token") val token: kotlin.String? = null
+    @JsonProperty("username") val username: kotlin.String? = null,
+
+    @JsonProperty("token") val token: kotlin.String? = null,
+
+    @JsonProperty("role") val role: UserRole? = null
 ) {
 
 }

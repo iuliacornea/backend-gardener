@@ -6,9 +6,10 @@ import org.openapitools.gardener.model.GrowingConfigurationDto
 import com.iulia.gardener.repo.GrowingConfigurationsRepository
 import com.iulia.gardener.service.GenericDtoService
 import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 import java.util.*
 
-@Component
+@Service
 class GrowingConfigurationDtoService(
         override var mapper: GrowingConfigurationsMapper,
         override var repository: GrowingConfigurationsRepository) :

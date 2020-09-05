@@ -11,6 +11,7 @@ class FeaturesConfigurationMapper: GenericMapper<FeaturesConfigurationDto, Featu
     override fun toEntity(dto: FeaturesConfigurationDto): FeaturesConfiguration {
         return FeaturesConfiguration(
                 id = dto.id,
+                name = dto.name,
                 stemType = dto.stemType,
                 stemSpikes = dto.stemSpikes,
                 leafDivisionOfBlade = dto.leafDivisionOfBlade,
@@ -18,7 +19,7 @@ class FeaturesConfigurationMapper: GenericMapper<FeaturesConfigurationDto, Featu
                 leafSurface = dto.leafSurface,
                 leafTexture = dto.leafTexture,
                 leafVeinType = dto.leafVeinType,
-                flowerExistance = dto.flowerExistance,
+                flowerExistence = dto.flowerExistence,
                 flowerShape = dto.flowerShape,
                 flowerPetals = dto.flowerPetals
         )
@@ -27,6 +28,7 @@ class FeaturesConfigurationMapper: GenericMapper<FeaturesConfigurationDto, Featu
     override fun toDto(entity: FeaturesConfiguration): FeaturesConfigurationDto {
         return FeaturesConfigurationDto(
                 id = entity.id,
+                name = entity.name,
                 stemType = entity.stemType,
                 stemSpikes = entity.stemSpikes,
                 leafDivisionOfBlade = entity.leafDivisionOfBlade,
@@ -34,7 +36,7 @@ class FeaturesConfigurationMapper: GenericMapper<FeaturesConfigurationDto, Featu
                 leafSurface = entity.leafSurface,
                 leafTexture = entity.leafTexture,
                 leafVeinType = entity.leafVeinType,
-                flowerExistance = entity.flowerExistance,
+                flowerExistence = entity.flowerExistence,
                 flowerShape = entity.flowerShape,
                 flowerPetals = entity.flowerPetals
         )

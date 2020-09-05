@@ -44,12 +44,11 @@ class Specimen(
         var season: Season?,
 
         @Column
-        var createdAt: Timestamp,
-
+        var createdAt: Timestamp?,
 
         @OneToOne(optional = true)
         @JoinColumn(
-                name = "gardener", nullable = true, updatable = false)
+                name = "gardener", nullable = true, updatable = false, insertable = true)
         var gardener: Gardener?
 ) : UuidEntity {
     override fun getUuid(): UUID {

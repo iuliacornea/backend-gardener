@@ -17,16 +17,15 @@ class UserService(var mapper: UserMapper, var repository: UserRepository) {
     }
 
     fun signupUser(userDto: UserDto): UserDto {
-        if(userDto.role != UserRole.USER) {
-            throw UnauthorizedUserRole("New users can be only regular users. Admins for example are not allowed to sign up.")
+        validateForSignUp(userDto)
+        var entityToSave = mapper.toEntity(userDto)
+        if(entityToSave.role == null) {
+            entityToSave.role = UserRole.USER
         }
-        if (emailUsed(userDto)) {
-            throw InvalidEmailAddress("There is already an account for email address: ${userDto.email}. Sign up not possible")
+        if(entityToSave.username == null) {
+            entityToSave.username = entityToSave.email
         }
-        if (userDto.password.length < 6) {
-            throw InvalidPassword("Password must have at least 6 characters")
-        }
-        return mapper.toDto(repository.save(mapper.toEntity(userDto)))
+        return mapper.toDto(repository.save(entityToSave))
     }
 
     fun loginUser(email: String, password: String): UserDto? {
@@ -55,6 +54,18 @@ class UserService(var mapper: UserMapper, var repository: UserRepository) {
 
     fun isAdmin(userToken: String): Boolean {
         return repository.findByToken(userToken).role == UserRole.ADMIN;
+    }
+
+    private fun validateForSignUp(userDto: UserDto) {
+        if(userDto.role == UserRole.ADMIN) {
+            throw UnauthorizedUserRole("New users can be only regular users. Admins are not allowed to sign up.")
+        }
+        if (emailUsed(userDto)) {
+            throw InvalidEmailAddress("There is already an account for email address: ${userDto.email}. Sign up not possible")
+        }
+        if (userDto.password.length < 6) {
+            throw InvalidPassword("Password must have at least 6 characters")
+        }
     }
 
 }

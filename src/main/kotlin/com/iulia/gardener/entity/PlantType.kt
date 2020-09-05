@@ -26,13 +26,13 @@ class PlantType (
         @Column
         var description: String?,
 
-        @ManyToOne(optional = false)
-        @JoinColumn(name = "features_configuration", nullable = false)
-        var featuresConfiguration: FeaturesConfiguration,
+        @ManyToOne(optional = true)
+        @JoinColumn(name = "features_configuration", nullable = true)
+        var featuresConfiguration: FeaturesConfiguration?,
 
-        @ManyToOne(optional = false)
-        @JoinColumn(name = "growing_configuration", nullable = false)
-        var growingConfiguration: GrowingConfiguration,
+        @ManyToOne(optional = true)
+        @JoinColumn(name = "growing_configuration", nullable = true)
+        var growingConfiguration: GrowingConfiguration?,
 
         @Column(name = "app_user")
         var appUserId: UUID?,

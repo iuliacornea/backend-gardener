@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component
 import java.sql.Timestamp
 import java.time.Instant
 import java.time.OffsetDateTime
+import java.time.ZoneId
 
 @Component
 class GreenhouseStatsMapper (private var specimenRepository: SpecimenRepository){
@@ -34,7 +35,7 @@ class GreenhouseStatsMapper (private var specimenRepository: SpecimenRepository)
                 id = entity.id!!,
                 gardenerId = entity.gardenerId,
                 specimenId = entity.specimenId,
-                receivedAt = OffsetDateTime.ofInstant(entity.receivedAt.toInstant(), null) ,
+                receivedAt = OffsetDateTime.ofInstant(entity.receivedAt.toInstant(), ZoneId.systemDefault()) ,
                 soilMoistureRaw = entity.soilMoistureRaw,
                 soilMoisturePercentage = entity.soilMoisturePercentage,
                 lightIntensityLux = entity.lightIntensityLux,

@@ -38,9 +38,7 @@ class UserTest {
     fun emailAlreadyUsed() {
         var userDto = UserDto(
                 email = "test2@email.com",
-                password = "password123",
-                username = "test2",
-                role = UserRole.USER
+                password = "password123"
         )
         var response = restTemplate.postForEntity("/v1/users/signup", userDto, UserDto::class.java)
         assert(response.hasBody())

@@ -3,7 +3,7 @@ info:
   version: 1.0.0
   title: Gardener API
   license:
-    name: UTCN
+    name: corneaiulia
 servers:
   - url: http://gardener.swagger.io/v1
 paths:
@@ -785,7 +785,7 @@ components:
       items:
         $ref: '#/components/schemas/GreenhouseStatsDto'
     UserDto:
-      required: ['email', 'password', 'username', 'role']
+      required: ['email', 'password']
       properties:
         id:
           type: string
@@ -801,7 +801,7 @@ components:
         role:
           $ref: '#/components/schemas/UserRole'
     PlantTypeDto:
-      required: ['name', 'featuresConfiguration', 'growingConfiguration']
+      required: ['name']
       properties:
         id:
           type: string
@@ -825,10 +825,13 @@ components:
         $ref: '#/components/schemas/PlantTypeDto'
     FeaturesConfigurationDto:
       type: object
+      required: ['name']
       properties:
         id:
           type: string
           format: uuid
+        name:
+          type: string
         stemType:
           $ref: '#/components/schemas/StemType'
         stemSpikes:
@@ -843,7 +846,7 @@ components:
           $ref: '#/components/schemas/LeafTexture'
         leafVeinType:
           $ref: '#/components/schemas/LeafVeinType'
-        flowerExistance:
+        flowerExistence:
           $ref: '#/components/schemas/FlowerExistance'
         flowerShape:
           $ref: '#/components/schemas/FlowerShape'

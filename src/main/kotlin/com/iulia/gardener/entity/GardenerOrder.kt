@@ -36,10 +36,10 @@ class GardenerOrder (
 
         @Enumerated(EnumType.STRING)
         @Column
-        var status: OrderStatus,
+        var status: OrderStatus?,
 
         @Column
-        var createdAt: Timestamp,
+        var createdAt: Timestamp?,
 
         @Column
         var lastUpdate: Timestamp?

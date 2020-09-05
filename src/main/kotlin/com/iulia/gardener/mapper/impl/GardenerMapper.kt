@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component
 import java.sql.Timestamp
 import java.time.Instant
 import java.time.OffsetDateTime
+import java.time.ZoneId
 
 @Component
 class GardenerMapper(
@@ -30,7 +31,7 @@ class GardenerMapper(
     fun toDto(entity: Gardener): GardenerDto {
         return GardenerDto(
                 id = entity.id,
-                createdAt = OffsetDateTime.ofInstant(entity.createdAt.toInstant(), null),
+                createdAt = OffsetDateTime.ofInstant(entity.createdAt!!.toInstant(), ZoneId.systemDefault()),
                 userId = entity.appUserId,
                 name = entity.name,
                 wifiNetwork = entity.wifiNetwork,

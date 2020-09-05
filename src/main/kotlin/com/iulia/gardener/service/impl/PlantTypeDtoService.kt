@@ -6,9 +6,10 @@ import org.openapitools.gardener.model.PlantTypeDto
 import com.iulia.gardener.repo.PlantTypeRepository
 import com.iulia.gardener.service.GenericDtoService
 import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 import java.util.*
 
-@Component
+@Service
 class PlantTypeDtoService(
         override var mapper: PlantTypeMapper,
         override var repository: PlantTypeRepository,
@@ -17,13 +18,15 @@ class PlantTypeDtoService(
     : GenericDtoService<PlantType, PlantTypeDto, PlantTypeMapper, PlantTypeRepository>() {
 
     override fun save(dto: PlantTypeDto): PlantTypeDto {
-        var features = featuresConfigurationService.save(dto.featuresConfiguration)
-        var growingConfiguration = configurationService.save(dto.growingConfiguration)
-
         var entity = mapper.toEntity(dto)
-        entity.featuresConfiguration.id = features.id
-        entity.growingConfiguration.id = growingConfiguration.id
-
+        if (dto.featuresConfiguration != null) {
+            var features = featuresConfigurationService.save(dto.featuresConfiguration)
+            entity.featuresConfiguration?.id = features.id
+        }
+        if (dto.growingConfiguration != null) {
+            var growingConfiguration = configurationService.save(dto.growingConfiguration)
+            entity.growingConfiguration?.id = growingConfiguration.id
+        }
         repository.saveAndFlush(entity)
         return mapper.toDto(entity)
     }

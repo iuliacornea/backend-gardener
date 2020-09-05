@@ -9,8 +9,10 @@ import org.openapitools.gardener.model.GardenerOrderDto
 import org.openapitools.gardener.model.OrderStatus
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.stereotype.Controller
 import java.util.*
 
+@Controller
 class GardenerOrderController(private var service: GardenerOrderDtoService, private var userService: UserService) : OrdersApi {
 
     override fun getOrders(userToken: String, status: List<OrderStatus>?): ResponseEntity<List<GardenerOrderDto>> {

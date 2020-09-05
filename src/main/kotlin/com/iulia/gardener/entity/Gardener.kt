@@ -34,7 +34,7 @@ class Gardener (
         var wifiPassword: String,
 
         @Column
-        var createdAt: Timestamp,
+        var createdAt: Timestamp?,
 
         @OneToOne(optional = false)
         @JoinColumn(

@@ -15,11 +15,11 @@ import javax.validation.constraints.Size
 /**
  * 
  * @param name 
- * @param featuresConfiguration 
- * @param growingConfiguration 
  * @param id 
  * @param description 
  * @param image 
+ * @param featuresConfiguration 
+ * @param growingConfiguration 
  * @param userId 
  */
 data class PlantTypeDto(
@@ -27,17 +27,15 @@ data class PlantTypeDto(
     @get:NotNull 
     @JsonProperty("name") val name: kotlin.String,
 
-    @get:NotNull 
-    @JsonProperty("featuresConfiguration") val featuresConfiguration: FeaturesConfigurationDto,
-
-    @get:NotNull 
-    @JsonProperty("growingConfiguration") val growingConfiguration: GrowingConfigurationDto,
-
     @JsonProperty("id") val id: java.util.UUID? = null,
 
     @JsonProperty("description") val description: kotlin.String? = null,
 
     @JsonProperty("image") val image: kotlin.String? = null,
+
+    @JsonProperty("featuresConfiguration") val featuresConfiguration: FeaturesConfigurationDto? = null,
+
+    @JsonProperty("growingConfiguration") val growingConfiguration: GrowingConfigurationDto? = null,
 
     @JsonProperty("userId") val userId: java.util.UUID? = null
 ) {

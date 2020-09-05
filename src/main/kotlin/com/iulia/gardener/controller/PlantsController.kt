@@ -43,9 +43,6 @@ class PlantsController(
     override fun postPlant(@NotNull @RequestParam(required = true, value = "userToken") userToken: String, @Valid @RequestBody plantTypeDto: PlantTypeDto): ResponseEntity<PlantTypeDto> {
         // will throw error if user is not found
         var user = userService.getUserByToken(userToken)
-        if(user == null) {
-            return ResponseEntity(HttpStatus.UNAUTHORIZED)
-        }
         if( userService.isAdmin(userToken)) {
             var globalPlantTypeDto = PlantTypeDto(
                     name = plantTypeDto.name,

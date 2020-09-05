@@ -7,9 +7,10 @@ import org.openapitools.gardener.model.GreenhouseStatsDto
 import org.openapitools.gardener.model.UserDto
 import org.openapitools.gardener.model.UserRole
 import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 import java.util.*
 
-@Component
+@Service
 class GreenhouseStatsDtoService(
         private var mapper: GreenhouseStatsMapper,
         private var repository: GreenhouseStatsRepository,

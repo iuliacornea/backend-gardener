@@ -28,7 +28,7 @@ class AppUser(
         var email: String,
 
         @Column
-        var username: String,
+        var username: String?,
 
         @Size(message = "Password must be at least 6 characters", min = 6)
         @Column
@@ -36,7 +36,7 @@ class AppUser(
 
         @Enumerated(EnumType.STRING)
         @Column
-        var role: UserRole,
+        var role: UserRole?,
 
         @Column
         var token: String?

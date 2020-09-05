@@ -30,6 +30,9 @@ class FeaturesConfiguration (
         @Column
         var id: UUID? = null,
 
+        @Column
+        var name: String,
+
         @Enumerated(EnumType.STRING)
         @Column
         var stemType: StemType?,
@@ -60,7 +63,7 @@ class FeaturesConfiguration (
 
         @Enumerated(EnumType.STRING)
         @Column
-        var flowerExistance: FlowerExistance?,
+        var flowerExistence: FlowerExistance?,
 
         @Enumerated(EnumType.STRING)
         @Column

@@ -22,6 +22,7 @@ import javax.validation.constraints.Size
 
 /**
  * 
+ * @param name 
  * @param id 
  * @param stemType 
  * @param stemSpikes 
@@ -30,11 +31,14 @@ import javax.validation.constraints.Size
  * @param leafSurface 
  * @param leafTexture 
  * @param leafVeinType 
- * @param flowerExistance 
+ * @param flowerExistence 
  * @param flowerShape 
  * @param flowerPetals 
  */
 data class FeaturesConfigurationDto(
+
+    @get:NotNull 
+    @JsonProperty("name") val name: kotlin.String,
 
     @JsonProperty("id") val id: java.util.UUID? = null,
 
@@ -52,7 +56,7 @@ data class FeaturesConfigurationDto(
 
     @JsonProperty("leafVeinType") val leafVeinType: LeafVeinType? = null,
 
-    @JsonProperty("flowerExistance") val flowerExistance: FlowerExistance? = null,
+    @JsonProperty("flowerExistence") val flowerExistence: FlowerExistance? = null,
 
     @JsonProperty("flowerShape") val flowerShape: FlowerShape? = null,
 

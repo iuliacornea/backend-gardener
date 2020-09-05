@@ -20,11 +20,11 @@ class FeaturesConfigurationDtoService(
     }
 
     fun getGlobalFeatureConfigurations(): List<FeaturesConfigurationDto> {
-        return repository.findAll()!!.map { mapper.toDto(it) }
+        return repository.findAll().map { mapper.toDto(it) }
     }
 
     fun getUserFeatureConfigurations(appUserUUID: UUID): List<FeaturesConfigurationDto> {
-        return repository.findAll()!!.map { mapper.toDto(it) }
+        return repository.findAll().map { mapper.toDto(it) }
     }
 
 }

@@ -8,6 +8,6 @@ npm run build
 
 cd dist
 
-copy .npmrc
+copy C:\LIC\backend-gardener\.openapi-generator\.npmrc  C:\LIC\backend-gardener\build\angular-client\dist
 
 npm publish --registry https://npm.pkg.github.com/ --access public

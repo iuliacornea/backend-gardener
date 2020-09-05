@@ -8,9 +8,10 @@ import org.openapitools.gardener.model.GardenerOrderDto
 import org.openapitools.gardener.model.UserDto
 import org.openapitools.gardener.model.UserRole
 import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 import java.util.*
 
-@Component
+@Service
 class GardenerDtoService(private var mapper: GardenerMapper, private var repository: GardenerRepository) {
 
     fun createFromOrder(order: GardenerOrderDto): Gardener {

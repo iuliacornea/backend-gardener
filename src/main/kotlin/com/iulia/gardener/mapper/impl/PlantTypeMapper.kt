@@ -11,13 +11,19 @@ import org.springframework.stereotype.Component
 
 @Component
 class PlantTypeMapper(
-    var featuresConfigurationMapper: FeaturesConfigurationMapper,
-    var growingConfigurationsMapper: GrowingConfigurationsMapper
-): GenericMapper<PlantTypeDto, PlantType> {
+        var featuresConfigurationMapper: FeaturesConfigurationMapper,
+        var growingConfigurationsMapper: GrowingConfigurationsMapper
+) : GenericMapper<PlantTypeDto, PlantType> {
 
     override fun toEntity(dto: PlantTypeDto): PlantType {
-        var featuresConfig: FeaturesConfiguration = featuresConfigurationMapper.toEntity(dto.featuresConfiguration)
-        var growingConfig: GrowingConfiguration = growingConfigurationsMapper.toEntity(dto.growingConfiguration)
+        var featuresConfig: FeaturesConfiguration? = null
+        if (dto.featuresConfiguration != null) {
+            featuresConfig = featuresConfigurationMapper.toEntity(dto.featuresConfiguration)
+        }
+        var growingConfig: GrowingConfiguration? = null
+        if(dto.growingConfiguration != null) {
+            growingConfig = growingConfigurationsMapper.toEntity(dto.growingConfiguration)
+        }
 
         return PlantType(
                 id = dto.id,
@@ -31,8 +37,14 @@ class PlantTypeMapper(
     }
 
     override fun toDto(entity: PlantType): PlantTypeDto {
-        var featuresConfig: FeaturesConfigurationDto = featuresConfigurationMapper.toDto(entity.featuresConfiguration)
-        var growingConfig: GrowingConfigurationDto = growingConfigurationsMapper.toDto(entity.growingConfiguration)
+        var featuresConfig: FeaturesConfigurationDto? = null
+        if (entity.featuresConfiguration != null) {
+            featuresConfig = featuresConfigurationMapper.toDto(entity.featuresConfiguration!!)
+        }
+        var growingConfig: GrowingConfigurationDto? = null
+        if (entity.growingConfiguration != null) {
+            growingConfig = growingConfigurationsMapper.toDto(entity.growingConfiguration!!)
+        }
 
         return PlantTypeDto(
                 id = entity.id,
