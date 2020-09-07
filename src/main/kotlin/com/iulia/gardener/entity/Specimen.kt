@@ -46,10 +46,8 @@ class Specimen(
         @Column
         var createdAt: Timestamp?,
 
-        @OneToOne(optional = true)
-        @JoinColumn(
-                name = "gardener", nullable = true, updatable = false, insertable = true)
-        var gardener: Gardener?
+        @Column(name = "gardener")
+        var gardenerId: UUID?
 ) : UuidEntity {
     override fun getUuid(): UUID {
         return id!!

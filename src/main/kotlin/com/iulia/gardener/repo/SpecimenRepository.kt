@@ -12,6 +12,5 @@ interface SpecimenRepository : JpaRepository<Specimen, UUID> {
 
     fun getAllByAppUserId(appUserId: UUID): List<Specimen>?
 
-    @Query("select s from Specimen s where s.gardener.id = :gardenerId")
-    fun findByGardenerId(@Param(value = "gardenerId") gardenerId: UUID): Specimen?
+    fun findByGardenerId(gardenerId: UUID): Specimen?
 }

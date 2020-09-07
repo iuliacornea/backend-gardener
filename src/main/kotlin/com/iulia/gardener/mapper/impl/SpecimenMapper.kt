@@ -40,7 +40,7 @@ class SpecimenMapper(
                 plantType = plantType,
                 season = dto.season,
                 createdAt = createdAt,
-                gardener = null
+                gardenerId = dto.gardenerId
         )
     }
 

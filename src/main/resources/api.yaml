@@ -99,6 +99,39 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  /gardeners/{id}:
+    get:
+      summary: 'Get one gardener'
+      operationId: getGardener
+      tags:
+        - gardeners
+      parameters:
+        - in: query
+          name: userToken
+          required: true
+          schema:
+            type: string
+          description: The token of the user making the request
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          required: true
+          description: Uuid of the gardener
+      responses:
+        '200':
+          description: Gardener
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GardenerDto'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
   /greenhouse/stats:
     post:
       summary: The statistics registered by a gardener
@@ -913,6 +946,9 @@ components:
         season:
           $ref: '#/components/schemas/Season'
         userId:
+          type: string
+          format: uuid
+        gardenerId:
           type: string
           format: uuid
         createdAt:

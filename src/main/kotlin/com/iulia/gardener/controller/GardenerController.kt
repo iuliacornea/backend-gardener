@@ -7,6 +7,7 @@ import org.openapitools.gardener.model.GardenerDto
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Component
+import java.util.*
 
 @Component
 class GardenerController(private var service: GardenerDtoService, private var userService: UserService) : GardenersApi {
@@ -15,5 +16,14 @@ class GardenerController(private var service: GardenerDtoService, private var us
         var requester = userService.getUserByToken(userToken)
         var gardeners = service.getGardeners(requester)
         return ResponseEntity(gardeners, HttpStatus.OK)
+    }
+
+    override fun getGardener(userToken: String, id: UUID): ResponseEntity<GardenerDto> {
+        var requester = userService.getUserByToken(userToken)
+        var gardener = service.getGardener(id)
+        if (requester == null || gardener == null || requester.id != gardener.userId) {
+            return ResponseEntity(HttpStatus.UNAUTHORIZED)
+        }
+        return ResponseEntity(gardener, HttpStatus.OK)
     }
 }

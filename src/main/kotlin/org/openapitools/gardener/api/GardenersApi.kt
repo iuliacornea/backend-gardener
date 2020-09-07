@@ -40,6 +40,17 @@ interface GardenersApi {
 
 
     @RequestMapping(
+            value = ["/gardeners/{id}"],
+            produces = ["application/json"], 
+            method = [RequestMethod.GET])
+    fun getGardener(@NotNull  @RequestParam(value = "userToken", required = true) userToken: kotlin.String
+, @PathVariable("id") id: java.util.UUID
+): ResponseEntity<GardenerDto> {
+        return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
+    }
+
+
+    @RequestMapping(
             value = ["/gardeners"],
             produces = ["application/json"], 
             method = [RequestMethod.GET])
