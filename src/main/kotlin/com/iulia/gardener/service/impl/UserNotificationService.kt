@@ -37,7 +37,7 @@ class UserNotificationService(val mailSender: MailSender,
             logger.log(Level.SEVERE, "Retrieved stats from ${now.toString()} to ${lastRead.toString()}")
             val lastStats = greenhouseStatsDtoService.findAllByGardenerIdAndSpecimenIdAndReceivedAtGreaterThan(
                     it.gardenerId!!, it.id!!, lastRead)
-            logger.log(Level.ALL, "Found ${lastStats.size} stats")
+            logger.log(Level.SEVERE, "Found ${lastStats.size} stats")
             if (!lastStats.isEmpty()) {
                 var averageSoilMoisture = 0
                 for (stat: GreenhouseStatsDto in lastStats) {
@@ -85,7 +85,7 @@ class UserNotificationService(val mailSender: MailSender,
         println("sending mail")
         mailSender.sendEmail(mail)
         println(" mail send")
-        logger.log(Level.ALL, "ALL: Mail sent to iulia")
+        logger.log(Level.SEVERE, "ALL: Mail sent to iulia")
 
     }
 
