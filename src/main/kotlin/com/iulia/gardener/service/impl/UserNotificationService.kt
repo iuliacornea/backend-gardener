@@ -12,6 +12,8 @@ import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import java.time.OffsetDateTime
 import java.util.*
+import java.util.logging.Level
+import java.util.logging.Logger
 
 @Component
 class UserNotificationService(val mailSender: MailSender,
@@ -22,15 +24,20 @@ class UserNotificationService(val mailSender: MailSender,
                               private val plantTypeDtoService: PlantTypeDtoService,
                               @Value("\${user-notifications-job.delay}") private val checkingInterval: Long) {
 
+    var logger: Logger = Logger.getLogger("UserNotificationService")
 
     @Scheduled(fixedRate = 30000)
     fun checkGreenhouseStatisticsAndNotifyUsers() {
+        logger.log(Level.SEVERE, "Starting to check for stats")
         val gardeners = gardenerDtoService.getAllGardeners()
         val specimensWithGardener = specimenDtoService.getAllSpecimentWithGardenerIn(gardeners)
         val now = OffsetDateTime.now()
         specimensWithGardener.forEach {
+            val lastRead = now.minusSeconds(checkingInterval/1000)
+            logger.log(Level.SEVERE, "Retrieved stats from ${now.toString()} to ${lastRead.toString()}")
             val lastStats = greenhouseStatsDtoService.findAllByGardenerIdAndSpecimenIdAndReceivedAtGreaterThan(
-                    it.gardenerId!!, it.id!!, now.minusSeconds(checkingInterval))
+                    it.gardenerId!!, it.id!!, lastRead)
+            logger.log(Level.ALL, "Found ${lastStats.size} stats")
             if (!lastStats.isEmpty()) {
                 var averageSoilMoisture = 0
                 for (stat: GreenhouseStatsDto in lastStats) {
@@ -71,4 +78,15 @@ class UserNotificationService(val mailSender: MailSender,
             }
         }
     }
+    @Bean
+    fun testEmail() {
+        logger.log(Level.SEVERE, "SEVERE: Send test mail to iulia")
+        var mail = mailSender.composeSoilMoistureTooLowEmail("iulia.cornea5@gmail.com", "JoseGar", "Planty")
+        println("sending mail")
+        mailSender.sendEmail(mail)
+        println(" mail send")
+        logger.log(Level.ALL, "ALL: Mail sent to iulia")
+
+    }
+
 }
