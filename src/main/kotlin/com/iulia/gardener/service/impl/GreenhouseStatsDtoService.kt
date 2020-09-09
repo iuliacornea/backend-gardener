@@ -8,6 +8,8 @@ import org.openapitools.gardener.model.UserDto
 import org.openapitools.gardener.model.UserRole
 import org.springframework.stereotype.Component
 import org.springframework.stereotype.Service
+import java.sql.Timestamp
+import java.time.OffsetDateTime
 import java.util.*
 
 @Service
@@ -52,5 +54,10 @@ class GreenhouseStatsDtoService(
         } else {
             repository.findAllByGardenerIdAndSpecimenId(gardenerId!!, specimenId!!).map { mapper.toDto(it) }
         }
+    }
+
+    fun findAllByGardenerIdAndSpecimenIdAndReceivedAtGreaterThan(gardenerId: UUID, specimenId: UUID, receivedAt: OffsetDateTime): List<GreenhouseStatsDto> {
+        return repository.findAllByGardenerIdAndSpecimenIdAndReceivedAtGreaterThan(
+                gardenerId, specimenId, Timestamp.from(receivedAt.toInstant())).map { mapper.toDto(it) }
     }
 }

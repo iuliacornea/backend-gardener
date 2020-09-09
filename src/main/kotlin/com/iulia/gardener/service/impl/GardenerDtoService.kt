@@ -30,4 +30,8 @@ class GardenerDtoService(private var mapper: GardenerMapper, private var reposit
         return mapper.toDto(repository.getOne(gardenerId))
     }
 
+    fun getAllGardeners(): List<GardenerDto> {
+        return repository.findAll().map { mapper.toDto(it) }
+    }
+
 }

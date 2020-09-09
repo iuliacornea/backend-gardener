@@ -13,4 +13,6 @@ interface SpecimenRepository : JpaRepository<Specimen, UUID> {
     fun getAllByAppUserId(appUserId: UUID): List<Specimen>?
 
     fun findByGardenerId(gardenerId: UUID): Specimen?
+
+    fun findAllByGardenerIdIn(gardenerIds: List<UUID>): List<Specimen>
 }

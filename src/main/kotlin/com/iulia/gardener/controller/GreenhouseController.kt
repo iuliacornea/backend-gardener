@@ -1,5 +1,6 @@
 package com.iulia.gardener.controller
 
+import com.iulia.gardener.mapper.impl.GreenhouseStatsMapper
 import com.iulia.gardener.service.impl.GreenhouseStatsDtoService
 import com.iulia.gardener.service.impl.SpecimenDtoService
 import com.iulia.gardener.service.impl.UserService
@@ -66,12 +67,12 @@ class GreenhouseController(
 
     private fun getSoilMoistureSummerMin(specimen: SpecimenDto): Int? {
         return specimen.growingConfiguration?.soilMoistureSummerMin
-                ?: specimen.plantType?.growingConfiguration?.soilMoistureSummerMin
+                ?: GreenhouseStatsMapper.getRawSoilMoistureFromPercentage(specimen.plantType?.growingConfiguration?.soilMoistureSummerMin!!)
     }
 
     private fun getSoilMoistureWinterMin(specimen: SpecimenDto): Int? {
         return specimen.growingConfiguration?.soilMoistureWinterMin
-                ?: specimen.plantType?.growingConfiguration?.soilMoistureWinterMin
+                ?: GreenhouseStatsMapper.getRawSoilMoistureFromPercentage(specimen.plantType?.growingConfiguration?.soilMoistureWinterMin!!)
     }
 
 

@@ -8,6 +8,7 @@ import com.iulia.gardener.repo.UserRepository
 import org.openapitools.gardener.model.UserDto
 import org.openapitools.gardener.model.UserRole
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class UserService(var mapper: UserMapper, var repository: UserRepository) {
@@ -67,5 +68,10 @@ class UserService(var mapper: UserMapper, var repository: UserRepository) {
             throw InvalidPassword("Password must have at least 6 characters")
         }
     }
+
+    fun getOneById(id: UUID): UserDto {
+        return mapper.toDto(repository.getOne(id))
+    }
+
 
 }

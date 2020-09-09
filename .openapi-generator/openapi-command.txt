@@ -1,5 +1,7 @@
 openapi-generator generate -g typescript-angular -c angular-config.json -i ../src/main/resources/api.yaml -o ../build/angular-client
 
+cd ../build/angular-client
+
 npm install
 
 npm i -D typescript@3.9.5

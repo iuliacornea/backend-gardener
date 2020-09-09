@@ -37,6 +37,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.flywaydb:flyway-core")
     implementation("javax.validation:validation-api")
+    implementation("com.sendgrid:sendgrid-java:4.0.1")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("com.h2database:h2")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {

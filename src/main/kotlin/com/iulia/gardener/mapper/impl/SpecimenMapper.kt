@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component
 import java.sql.Time
 import java.sql.Timestamp
 import java.time.Instant
+import java.time.OffsetDateTime
+import java.time.ZoneId
 
 @Component
 class SpecimenMapper(
@@ -59,7 +61,9 @@ class SpecimenMapper(
                 growingConfiguration = growingConfigurations,
                 plantType = plantType,
                 season = entity.season,
-                userId = entity.appUserId
+                userId = entity.appUserId,
+                gardenerId = entity.gardenerId,
+                createdAt = OffsetDateTime.ofInstant(entity.createdAt!!.toInstant(), ZoneId.systemDefault())
         )
     }
 }

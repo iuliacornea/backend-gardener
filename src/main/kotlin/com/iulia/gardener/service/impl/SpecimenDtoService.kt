@@ -3,6 +3,7 @@ package com.iulia.gardener.service.impl
 import com.iulia.gardener.entity.Specimen
 import com.iulia.gardener.mapper.impl.SpecimenMapper
 import com.iulia.gardener.repo.SpecimenRepository
+import org.openapitools.gardener.model.GardenerDto
 import org.openapitools.gardener.model.SpecimenDto
 import org.springframework.stereotype.Service
 import java.util.*
@@ -27,6 +28,12 @@ class SpecimenDtoService(var mapper: SpecimenMapper, var repository: SpecimenRep
     fun saveSpecimen(specimenDto: SpecimenDto): SpecimenDto {
         var saved = repository.save(mapper.toEntity(specimenDto))
         return mapper.toDto(saved)
+    }
+
+    fun getAllSpecimentWithGardenerIn(gardeners: List<GardenerDto>): List<SpecimenDto> {
+        val gardenerIds = mutableListOf<UUID>()
+        gardeners.forEach { if (it.id != null) gardenerIds.add(it.id) }
+        return repository.findAllByGardenerIdIn(gardenerIds).map { mapper.toDto(it) }
     }
 
 }

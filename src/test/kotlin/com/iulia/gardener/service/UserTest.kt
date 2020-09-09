@@ -97,7 +97,7 @@ class UserTest {
     }
 
     @Test
-    fun logout() {
+    fun `Assert logout removes the user token from the database`() {
         var userDto = UserDto(
                 email = "test6@email.com",
                 password = "password123",
