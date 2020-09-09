@@ -22,7 +22,8 @@ class UserNotificationService(val mailSender: MailSender,
                               private val userService: UserService,
                               private val greenhouseStatsDtoService: GreenhouseStatsDtoService,
                               private val plantTypeDtoService: PlantTypeDtoService,
-                              @Value("\${user-notifications-job.delay}") private val checkingInterval: Long) {
+                              @Value("\${user-notifications-job.delay}") private val checkingInterval: Long,
+                              @Value("\${spring.sendgrid.api-key}") private val sengridKey: String) {
 
     var logger: Logger = Logger.getLogger("UserNotificationService")
 
@@ -33,7 +34,7 @@ class UserNotificationService(val mailSender: MailSender,
         val specimensWithGardener = specimenDtoService.getAllSpecimentWithGardenerIn(gardeners)
         val now = OffsetDateTime.now()
         specimensWithGardener.forEach {
-            val lastRead = now.minusSeconds(checkingInterval/1000)
+            val lastRead = now.minusSeconds(checkingInterval / 1000)
             logger.log(Level.SEVERE, "Retrieved stats from ${now.toString()} to ${lastRead.toString()}")
             val lastStats = greenhouseStatsDtoService.findAllByGardenerIdAndSpecimenIdAndReceivedAtGreaterThan(
                     it.gardenerId!!, it.id!!, lastRead)
@@ -78,9 +79,11 @@ class UserNotificationService(val mailSender: MailSender,
             }
         }
     }
+
     @Bean
     fun testEmail() {
         logger.log(Level.SEVERE, "SEVERE: Send test mail to iulia")
+        logger.log(Level.SEVERE, "Using key $sengridKey" )
         var mail = mailSender.composeSoilMoistureTooLowEmail("iulia.cornea5@gmail.com", "JoseGar", "Planty")
         println("sending mail")
         mailSender.sendEmail(mail)
