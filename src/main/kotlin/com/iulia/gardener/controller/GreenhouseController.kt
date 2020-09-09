@@ -13,8 +13,10 @@ import org.openapitools.gardener.model.SpecimenDto
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
+import org.springframework.web.bind.annotation.CrossOrigin
 import java.util.*
 
+@CrossOrigin(origins = ["*"])
 @Controller
 class GreenhouseController(
         private var service: GreenhouseStatsDtoService,

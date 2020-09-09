@@ -10,8 +10,10 @@ import org.openapitools.gardener.model.OrderStatus
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
+import org.springframework.web.bind.annotation.CrossOrigin
 import java.util.*
 
+@CrossOrigin(origins = ["*"])
 @Controller
 class GardenerOrderController(private var service: GardenerOrderDtoService, private var userService: UserService) : OrdersApi {
 
