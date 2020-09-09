@@ -28,7 +28,7 @@ class MailSender(
     }
 
     fun composeSoilMoistureTooLowEmail(userEmail: String, gardenerName: String, specimenName: String): Mail {
-        println("Compose email to ${userEmail} from gardener ${gardenerName} for specimen ${specimenName}")
+        println("Compose email to ${userEmail} from gardener ${gardenerName} for specimen ${specimenName} from ${sendGridVerifiedEmail.email}")
         var to = Email(userEmail)
         var subject = "Soil moisture is too low for $specimenName";
         var content = Content("text/plain", "Soil moisture registered by $gardenerName seems to have been too low for the last " +
