@@ -45,7 +45,8 @@ class UserNotificationService(val mailSender: MailSender,
                                 && configs?.soilMoistureWinterMin != null
                                 && averageSoilMoisture < configs.soilMoistureWinterMin)) {
                     val userEmail = userService.getOneById(it.userId).email
-//                    mailSender.sendEmail(mailSender.composeSoilMoistureTooLowEmail(userEmail, getGardenerName(gardeners, it.gardenerId), it.name))
+                    println("send email for soil moisture too low")
+                    mailSender.sendEmail(mailSender.composeSoilMoistureTooLowEmail(userEmail, getGardenerName(gardeners, it.gardenerId), it.name))
                 }
             }
 
